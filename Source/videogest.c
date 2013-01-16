@@ -1,7 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<conio.h>
+#include<ctype.h>
 #include"creditos.c"
 #include"menu_princ.c"
+#include"menu_aluguer.c"
+#include"aluguer.c"
 
 void menu_princ(void);
 

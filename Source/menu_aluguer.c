@@ -1,4 +1,4 @@
-void menu_princ(void)
+void menu_aluguer(void)
 {
     char op;
 
@@ -7,22 +7,24 @@ void menu_princ(void)
         system("CLS");
         printf("\n\n\t\t\tNRM");
         printf("\n\n\t\t\tVideo Gest");
-        printf("\nA - Socios");
-        printf("\nB - Filmes");
-        printf("\nC - Alugueres");
+        printf("\nA - Alugar");
+        printf("\nB - Devolver");
+        printf("\nC - Historico");
         printf("\nS - Sair");
         op=toupper(getch());
         switch(op)
         {
             case 'A':
-                printf("Socios");
+                aluguer();
+                printf("Alugar");
                 break;
             case 'B':
-                printf("Filmes");
+                devolucao();
+                printf("Devolver");
                 break;
             case 'C':
-                menu_aluguer();
-                printf("Alugueres");
+                ver_alugados();
+                printf("Historico");
                 break;
             case 'S': exit(0);
         }
