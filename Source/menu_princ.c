@@ -19,6 +19,7 @@ void menu_princ(void)
                 printf("Socios");
                 break;
             case 'B':
+                menu_filmes();
                 printf("Filmes");
                 break;
             case 'C':
