@@ -1,6 +1,6 @@
 /// funcao que mostra um menu para fazer cada uma das operaçoes: ver, adicionar, remover.
-///\param 
-int menu_socios()
+///\param
+void menu_socios()
 {
     char op;
 
@@ -21,11 +21,11 @@ int menu_socios()
                 printf("Lista de socios");
                 break;
             case 'B':
-                adicionar();
+                //adicionar();
                 printf("Adicionar socio");
                 break;
             case 'C':
-                remover();
+                //remover();
                 printf("Remover socio");
                 break;
             case 'S': exit(0);
@@ -33,4 +33,4 @@ int menu_socios()
     }
     while(op!='S');
 
-} 
+}

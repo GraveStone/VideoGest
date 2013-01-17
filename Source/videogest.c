@@ -5,7 +5,9 @@
 #include"creditos.c"
 #include"menu_princ.c"
 #include"menu_aluguer.c"
+#include"Menu_socios.c"
 #include"aluguer.c"
+#include"socios.c"
 
 void menu_princ(void);
 
