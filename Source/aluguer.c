@@ -7,8 +7,7 @@ DATA;
 
 typedef struct
 {
-    unsigned long num_filme;
-    unsigned long num_socio;
+    unsigned long num_filme, num_socio;
     DATA data_lev, data_ent;
     int dias, estado;
 }
@@ -34,10 +33,10 @@ void aluguer()
     {
     system("CLS");
     printf("\nFicha de Aluger:");
-    printf("\n\nInsira o numero do Filme:");
-    scanf("%lu",&aux_al.num_filme);
     printf("\n\nInsira o numero de Socio:");
     scanf("%lu",&aux_al.num_socio);
+    printf("\n\nInsira o numero de Filme:");
+    scanf("%lu",&aux_al.num_filme);
     printf("\nData:\n\nInsira a DATA formato aaaa-mm-dd:\n\nANO:");
     scanf("%ld",&aux_al.data_lev.ano);
     printf("\n\nInsira o MES:");
@@ -82,6 +81,8 @@ void aluguer()
         else
         {
             do
+
+
             {
                 scanf("%d",&aux_al.data_lev.dia);
             }
@@ -121,7 +122,7 @@ void devolucao()
         fclose(fp_ver);
         return;
     }
-    printf("Qual o número para devolução");
+    printf("Qual o Numero de Socio para devolucao:");
     scanf("%d",&dev);
     printf("\nN§ filme\tSocio");
     do
@@ -129,7 +130,7 @@ void devolucao()
         teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
         if(teste==1)
         {
-            if(aux_al.num_filme==dev)
+            if(aux_al.num_socio==dev)
             {
                printf("\n%lu\t%lu\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
             }

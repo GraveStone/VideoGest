@@ -26,7 +26,8 @@ void menu_aluguer(void)
                 ver_alugados();
                 printf("Historico");
                 break;
-            case 'S': exit(0);
+            case 'S':
+                return;
         }
     }
     while(op!='S');
