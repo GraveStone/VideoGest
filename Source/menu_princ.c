@@ -15,9 +15,11 @@ void menu_princ(void)
         switch(op)
         {
             case 'A':
+                menu_socios();
                 printf("Socios");
                 break;
             case 'B':
+                menu_filmes();
                 printf("Filmes");
                 break;
             case 'C':
