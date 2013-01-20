@@ -19,8 +19,6 @@ void main(void)
 {
     creditos();
     system("CLS");
-    printf("Prima uma tecla para o ecran seguinte");
-    getch();
     menu_princ();
     system("CLS");
     printf("The end");

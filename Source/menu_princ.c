@@ -5,12 +5,13 @@ void menu_princ(void)
     do
     {
         system("CLS");
-        printf("\n\n\t\t\tNRM");
-        printf("\n\n\t\t\tVideo Gest");
-        printf("\nA - Socios");
-        printf("\nB - Filmes");
-        printf("\nC - Alugueres");
-        printf("\nS - Sair");
+        printf("\n\n\t\t\t     NRM");
+        printf("\n\n\t\t\t  Video Gest");
+        printf("\n\n\t\t\tMenu Principal");
+        printf("\n\n\t\tA - Socios");
+        printf("\n\t\tB - Filmes");
+        printf("\n\t\tC - Alugueres");
+        printf("\n\t\tS - Sair");
         op=toupper(getch());
         switch(op)
         {

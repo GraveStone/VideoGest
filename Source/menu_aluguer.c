@@ -5,12 +5,13 @@ void menu_aluguer(void)
     do
     {
         system("CLS");
-        printf("\n\n\t\t\tNRM");
-        printf("\n\n\t\t\tVideo Gest");
-        printf("\nA - Alugar");
-        printf("\nB - Devolver");
-        printf("\nC - Historico");
-        printf("\nS - Sair");
+        printf("\n\n\t\t\t     NRM");
+        printf("\n\n\t\t\t  Video Gest");
+        printf("\n\n\t\t\t Menu aluguer");
+        printf("\n\n\t\tA - Alugar");
+        printf("\n\t\tB - Devolver");
+        printf("\n\t\tC - Historico");
+        printf("\n\t\tS - Voltar ao Menu Principal");
         op=toupper(getch());
         switch(op)
         {

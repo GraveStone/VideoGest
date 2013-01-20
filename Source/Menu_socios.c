@@ -7,12 +7,13 @@ void menu_socios()
     do
     {
         system("CLS");
-        printf("\n\n\t\t\tNRM");
-        printf("\n\n\t\t\tVideo Gest");
-        printf("\nA - Ver lista de socios");
-        printf("\nB - Adicionar socio");
-        printf("\nC - Remover socio");
-        printf("\nS - Sair");
+         printf("\n\n\t\t\t     NRM");
+        printf("\n\n\t\t\t  Video Gest");
+        printf("\n\n\t\t\t Menu Socios");
+        printf("\n\n\t\tA - Ver lista de socios");
+        printf("\n\t\tB - Adicionar socio");
+        printf("\n\t\tC - Remover socio");
+        printf("\n\t\tS - Voltar ao Menu Principal");
         op=toupper(getch());
         switch(op)
         {
@@ -28,7 +29,7 @@ void menu_socios()
                 //remover();
                 printf("Remover socio");
                 break;
-            case 'S': exit(0);
+            case 'S': return;
         }
     }
     while(op!='S');

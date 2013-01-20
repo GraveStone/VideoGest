@@ -7,12 +7,13 @@ void menu_filmes()
     do
     {
         system("CLS");
-        printf("\n\n\t\t\tNRM");
-        printf("\n\n\t\t\tVideo Gest");
-        printf("\nA - Ver lista de filmes");
-        printf("\nB - Adicionar filme");
-        printf("\nC - Remover filme");
-        printf("\nS - Sair");
+        printf("\n\n\t\t\t     NRM");
+        printf("\n\n\t\t\t  Video Gest");
+        printf("\n\n\t\t\t Menu Filmes");
+        printf("\n\n\t\tA - Ver lista de filmes");
+        printf("\n\t\tB - Adicionar filme");
+        printf("\n\t\tC - Remover filme");
+        printf("\n\t\tS - Voltar ao Menu Principal");
         op=toupper(getch());
         switch(op)
         {
@@ -27,7 +28,7 @@ void menu_filmes()
                 //remover();
                 printf("\nC - Remover filme");
                 break;
-            case 'S': exit(0);
+            case 'S': return;
         }
     }
     while(op!='S');

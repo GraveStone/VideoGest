@@ -20,7 +20,7 @@ void inserir_filme()
 {
     FILE *fp_fil;
     char op;
-
+    int n_reg;
 
     system("CLS");
     fp_fil=fopen("filmes.txt","a+b");
@@ -32,10 +32,22 @@ void inserir_filme()
     }
     do
     {
+    fseek(fp_fil,0L,SEEK_END);
+    n_reg=(ftell(fp_fil))/sizeof(filme);
+    rewind(fp_fil);
+    if(n_reg==0)
+    {
+    printf("\n numero de registos total = %d",n_reg);
+    getch();
+    aux_fil.num_filme=n_reg+1;
+    }
+    aux_fil.num_filme=n_reg+1;
+    printf("\n numero de registos total = %d",n_reg);
+    getch();
     system("CLS");
     printf("\nFicha de Aluger:");
-    printf("\n\nInsira o numero do Filme:");
-    scanf("%d",&aux_fil.num_filme);
+    printf("\n\nNumero do Filme:%d",aux_fil.num_filme);
+    //scanf("%d",&aux_fil.num_filme);
     printf("\n\nInsira o nome do filme:\n");
     rewind(stdin);
     gets(aux_fil.nome);
@@ -48,12 +60,19 @@ void inserir_filme()
     getchar();
     fwrite(&aux_fil,sizeof(filme),1,fp_fil);
     rewind(stdin);  // para limpar o buffer do teclado
-    printf("Continuar s inserir filme");
+    do
+    {
+    printf("Quer inserir outro Filme? (S/N)");
     op=toupper(getch());
+    if(op!='S' && op!='N')
+    {
+      printf("tecla nao e valida");
+    }
+    }
+    while(op!='S' && op!='N');
     }
     while(op!='N');
     fclose(fp_fil);
-
 }
 
 /// Função para modificar filme.
