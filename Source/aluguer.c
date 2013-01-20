@@ -7,7 +7,7 @@ DATA;
 
 typedef struct
 {
-    unsigned long num_filme, num_socio;
+    int num_filme, num_socio;
     DATA data_lev, data_ent;
     int dias, estado;
 }
@@ -19,7 +19,8 @@ void aluguer()
 {
     FILE *fp_al;
     char op;
-    int bissexto;
+    int bissexto, teste, a;
+    int n_filme;
 
     system("CLS");
     fp_al=fopen("alugados.txt","a+b");
@@ -34,11 +35,25 @@ void aluguer()
     system("CLS");
     printf("\nFicha de Aluger:");
     printf("\n\nInsira o numero de Socio:");
-    scanf("%lu",&aux_al.num_socio);
+    scanf("%d",&aux_al.num_socio);
     printf("\n\nInsira o numero de Filme:");
-    scanf("%lu",&aux_al.num_filme);
+    scanf("%d",&n_filme);
+    do
+    {
+       a=filme_existe(n_filme);
+       if(a==0)
+       {
+        printf("\n\nNumero não valido insira novo numero de Filme:");
+        scanf("%d",&n_filme);
+       }
+       else
+       {
+        aux_al.num_filme=n_filme;
+       }
+    }
+    while(aux_al.num_filme!=n_filme);
     printf("\nData:\n\nInsira a DATA formato aaaa-mm-dd:\n\nANO:");
-    scanf("%ld",&aux_al.data_lev.ano);
+    scanf("%d",&aux_al.data_lev.ano);
     printf("\n\nInsira o MES:");
     getchar();
     do
@@ -91,7 +106,7 @@ void aluguer()
     }
     aux_al.estado=1;
     fwrite(&aux_al,sizeof(ALUGAR),1,fp_al);
-    rewind(stdin);  // para limpar o buffer do teclado
+    rewind(stdin);
     printf("Continuar o aluguer");
     op=toupper(getch());
     }
@@ -104,7 +119,7 @@ void devolucao()
     FILE *fp_ver;
     int teste,n_reg,dev;
 
-    system("cls");     //clrscr();
+    system("cls");
     fp_ver=fopen("alugados.txt","r+b");
     if(!fp_ver)
     {
@@ -132,9 +147,8 @@ void devolucao()
         {
             if(aux_al.num_socio==dev)
             {
-               printf("\n%lu\t%lu\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+               printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
             }
-
         }
     }
     while(!feof(fp_ver));
@@ -147,7 +161,7 @@ void ver_alugados(void)
   FILE *fp_ver;
   int teste,n_reg;
 
-  system("cls");     //clrscr();
+  system("cls");
   fp_ver=fopen("alugados.txt","rb");
   if(!fp_ver)
    {
@@ -171,7 +185,7 @@ void ver_alugados(void)
     teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
     if(teste==1)
      {
-      printf("\n%lu\t%lu\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+      printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
      }
    }
   while(!feof(fp_ver));

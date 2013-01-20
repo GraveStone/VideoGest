@@ -12,9 +12,6 @@
 #include"socios.c"
 #include"filmes.c"
 
-
-void menu_princ(void);
-
 void main(void)
 {
     creditos();
