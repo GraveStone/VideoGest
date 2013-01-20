@@ -37,17 +37,12 @@ void inserir_filme()
     rewind(fp_fil);
     if(n_reg==0)
     {
-    printf("\n numero de registos total = %d",n_reg);
-    getch();
-    aux_fil.num_filme=n_reg+1;
+     aux_fil.num_filme=n_reg+1;
     }
     aux_fil.num_filme=n_reg+1;
-    printf("\n numero de registos total = %d",n_reg);
-    getch();
     system("CLS");
     printf("\nFicha de Aluger:");
     printf("\n\nNumero do Filme:%d",aux_fil.num_filme);
-    //scanf("%d",&aux_fil.num_filme);
     printf("\n\nInsira o nome do filme:\n");
     rewind(stdin);
     gets(aux_fil.nome);
@@ -57,16 +52,15 @@ void inserir_filme()
     rewind(stdin);
     gets(aux_fil.genero);
     aux_fil.estado=1;
-    getchar();
     fwrite(&aux_fil,sizeof(filme),1,fp_fil);
     rewind(stdin);  // para limpar o buffer do teclado
     do
     {
-    printf("Quer inserir outro Filme? (S/N)");
+    printf("\nQuer inserir outro Filme? (S/N)");
     op=toupper(getch());
     if(op!='S' && op!='N')
     {
-      printf("tecla nao e valida");
+      printf("\ntecla nao e valida");
     }
     }
     while(op!='S' && op!='N');
