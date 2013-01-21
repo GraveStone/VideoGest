@@ -163,6 +163,36 @@ void carregar_filmes()
 {}
 
 
-int
+int filme_existe(long int n_filme)
+{
+  FILE *fp_fil;
+  int teste;
+
+  system("cls");
+  fp_fil=fopen("filmes.txt","rb");
+  if(!fp_fil)
+   {
+    printf("\n\t Erro na leitura do Ficheiro!!");
+    getch();
+    return 0;
+   }
+   do
+   {
+        teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+        if(teste==1)
+        {
+            if(aux_fil.num_filme==n_filme)
+            {
+               fclose(fp_fil);
+               return 1;
+            }
+        }
+    }
+    while(!feof(fp_fil));
+    getch();
+    fclose(fp_fil);
+    return 0;
+}
+
 
 
