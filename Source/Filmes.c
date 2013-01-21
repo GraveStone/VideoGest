@@ -86,8 +86,8 @@ void ver_filmes(void)
     return;
    }
   fseek(fp_ver_fil,0L,SEEK_END);
-  n_reg=(ftell(fp_ver_fil))/sizeof(Filme);
-  rewind(fp_ver_filme);
+  n_reg=(ftell(fp_ver_fil))/sizeof(filme);
+  rewind(fp_ver_fil);
   if(n_reg==0)
    {
     printf("\n Ficheiro vazio");
@@ -98,7 +98,7 @@ void ver_filmes(void)
   printf("\nN§ filme\tSocio");
   do
    {
-    teste=fread(&aux_al,sizeof(Filme),1,fp_ver_fil);
+    teste=fread(&aux_al,sizeof(filme),1,fp_ver_fil);
     if(teste==1)
      {
       printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);

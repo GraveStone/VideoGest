@@ -36,7 +36,7 @@ void aluguer()
     printf("\nFicha de Aluger:");
     printf("\n\nInsira o numero de Socio:");
     scanf("%d",&n_socio);
-    do
+    /*do
     {
        a=socio_existe(n_socio);
        if(a==0)
@@ -50,7 +50,7 @@ void aluguer()
        }
     }
     while(aux_al.num_socio!=n_socio);
-    printf("\n\nInsira o numero de Filme:");
+    */printf("\n\nInsira o numero de Filme:");
     scanf("%d",&n_filme);
     do
     {
