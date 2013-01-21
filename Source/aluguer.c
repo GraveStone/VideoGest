@@ -19,8 +19,8 @@ void aluguer()
 {
     FILE *fp_al;
     char op;
-    int bissexto, teste, a;
-    int n_filme;
+    int bissexto, teste, a, b;
+    int n_filme, n_socio;
 
     system("CLS");
     fp_al=fopen("alugados.txt","a+b");
@@ -35,13 +35,27 @@ void aluguer()
     system("CLS");
     printf("\nFicha de Aluger:");
     printf("\n\nInsira o numero de Socio:");
-    scanf("%d",&aux_al.num_socio);
+    scanf("%d",&n_socio);
+    do
+    {
+       a=socio_existe(n_socio);
+       if(a==0)
+       {
+        printf("\n\nNumero não valido insira novo numero de Socio:");
+        scanf("%d",&n_socio);
+       }
+       else
+       {
+        aux_al.num_socio=n_socio;
+       }
+    }
+    while(aux_al.num_socio!=n_socio);
     printf("\n\nInsira o numero de Filme:");
     scanf("%d",&n_filme);
     do
     {
-       a=filme_existe(n_filme);
-       if(a==0)
+       b=filme_existe(n_filme);
+       if(b==0)
        {
         printf("\n\nNumero não valido insira novo numero de Filme:");
         scanf("%d",&n_filme);
