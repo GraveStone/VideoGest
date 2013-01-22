@@ -12,7 +12,7 @@
 #include"socios.c"
 #include"filmes.c"
 
-void main(void)
+int main()
 {
     creditos();
     system("CLS");

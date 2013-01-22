@@ -16,7 +16,7 @@ filme aux_fil;
 
 /// Função para inserir um novo filme.
 
-void inserir_filme()
+int inserir_filme()
 {
     FILE *fp_fil;
     char op;
@@ -72,7 +72,7 @@ void inserir_filme()
 /// Função para ver filmes
 
 
-void ver_filmes(void)
+int ver_filmes(void)
  {
   FILE *fp_ver_fil;
   int teste,n_reg;
@@ -95,13 +95,13 @@ void ver_filmes(void)
     fclose(fp_ver_fil);
     return;
    }
-  printf("\nN§ filme\tSocio");
+  printf("\nN.filme\tTitulo\tDuracao\tGenero\tEstado");
   do
    {
-    teste=fread(&aux_al,sizeof(filme),1,fp_ver_fil);
+    teste=fread(&aux_fil,sizeof(filme),1,fp_ver_fil);
     if(teste==1)
      {
-      printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+      printf("\n%d\t\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
      }
    }
   while(!feof(fp_ver_fil));

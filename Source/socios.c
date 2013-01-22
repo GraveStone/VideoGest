@@ -14,7 +14,7 @@ typedef struct
 SOCIO aux_soc;
 /// funcao para mostrar a lista de socios
 /// param ficheiro Socios, estutura Socios
-void ver_lista()
+int ver_lista()
 {
      FILE *fp_ver;
      int teste;

@@ -1,6 +1,6 @@
 /// funcao que mostra um menu para fazer cada uma das operaçoes: ver, adicionar, remover.
 ///\param
-void menu_filmes()
+int menu_filmes()
 {
     char op;
 
@@ -18,7 +18,7 @@ void menu_filmes()
         switch(op)
         {
             case 'A':
-                //ver_lista();
+                 ver_filmes();
                  printf("\nA - Ver lista de filmes");
                 break;
             case 'B':

@@ -15,7 +15,7 @@ ALUGAR;
 
 ALUGAR aux_al;
 
-void aluguer()
+int aluguer()
 {
     FILE *fp_al;
     char op;
@@ -128,7 +128,7 @@ void aluguer()
     fclose(fp_al);
 }
 
-void devolucao()
+int devolucao()
 {
     FILE *fp_ver;
     int teste,n_reg,dev;
@@ -170,7 +170,7 @@ void devolucao()
     fclose(fp_ver);
 }
 
-void ver_alugados(void)
+int ver_alugados(void)
  {
   FILE *fp_ver;
   int teste,n_reg;

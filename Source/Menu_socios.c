@@ -1,6 +1,6 @@
 /// funcao que mostra um menu para fazer cada uma das operaçoes: ver, adicionar, remover.
 ///\param
-void menu_socios()
+int menu_socios()
 {
     char op;
 

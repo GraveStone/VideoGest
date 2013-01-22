@@ -1,4 +1,4 @@
-void menu_aluguer(void)
+int menu_aluguer(void)
 {
     char op;
 
