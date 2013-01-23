@@ -101,7 +101,10 @@ int ver_filmes(void)
     teste=fread(&aux_fil,sizeof(filme),1,fp_ver_fil);
     if(teste==1)
      {
-      printf("\n%d\t\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
+      if(aux_fil.estado==1)
+      {
+         printf("\n%d\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
+      }
      }
    }
   while(!feof(fp_ver_fil));
@@ -110,57 +113,17 @@ int ver_filmes(void)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /// Função para modificar filme.
 
 int modificar_filme()
 {
 }
-/// Função para apagar filme.
-/// \param nome : nome do filme
-/// \param nome : nome do filme
-/// \paramduracao,
-/// \paramgenero[Mgenero],
-/// \paramestado
-int apagar_filme(
-        int num_filme,
-        char nome[Mnome],
-        int duracao,
-        char genero[Mgenero],
-        int estado
-)
-{
-}
+///Apagar filme
 
-
-void gravar_filmes()
+int apagar_filme( )
 {
 
 }
-
-void carregar_filmes()
-{}
 
 
 int filme_existe(long int n_filme)
@@ -193,6 +156,3 @@ int filme_existe(long int n_filme)
     fclose(fp_fil);
     return 0;
 }
-
-
-
