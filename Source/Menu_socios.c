@@ -22,7 +22,7 @@ int menu_socios()
                 printf("Lista de socios");
                 break;
             case 'B':
-                //adicionar();
+                adicionar_soc();
                 printf("Adicionar socio");
                 break;
             case 'C':

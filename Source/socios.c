@@ -39,16 +39,16 @@ int ver_lista()
 
     } while (!feof(fp_ver));
  }
- 
+
 ///funcao para ver que socio existem
-///param  
+///param
  int socio_existe(long int n_soc)
 {
   FILE *fp_soc;
   int teste;
 
   system("cls");
-  fp_fil=fopen("socios.txt","rb");
+  fp_soc=fopen("socios.txt","rb");
   if(!fp_soc)
    {
     printf("\n\t Erro na leitura do Ficheiro!!");
@@ -62,28 +62,28 @@ int ver_lista()
         {
             if(aux_soc.num_soc==n_soc)
             {
-               fclose(fp_fil);
+               fclose(fp_soc);
                return 1;
             }
         }
     }
-    while(!feof(fp_fil));
+    while(!feof(fp_soc));
     getch();
-    fclose(fp_fil);
+    fclose(fp_soc);
     return 0;
 }
- 
+
 /// funcao para adicionar socio
 /// \param nome do socio
 /// \param morada
 /// \param numero de socio
 /// \param data de nascimento
 /// \param contacto
-int adicionar_soc(SOCIOS *soc)
+int adicionar_soc(SOCIO *soc)
 {
     int n;
     long int inserir;
-    
+
     system ("cls");
     printf("Qual o número de sócio que quer inserir? ");
     scanf("%ld",&inserir);
@@ -93,9 +93,9 @@ int adicionar_soc(SOCIOS *soc)
                      {
                                          soc[n].num_soc=inserir;
                                          printf("\n Nome do socio: ");
-                                         scanf("%s";soc[n].nome);
+                                         scanf("%s",soc[n].nome);
                                          printf("\n Data de nascimento: ");
-                                         scaf("%s",soc[n].dt_nasc);
+                                         scanf("%s",soc[n].dt_nasc);
                                          printf("\n Morada: ");
                                          scanf("%s",soc[n].morada);
                                          printf("\n Contacto: ");
@@ -106,7 +106,8 @@ int adicionar_soc(SOCIOS *soc)
                      }
      printf("ERRO!! NÃO É POSSÍVEL INSERIR SOCIO!");
      getch();
-     return(0);                
+     return(0);
+}
 }
 /// funcao para modificar a ficha de socio
 /// \param nome do socio
@@ -114,16 +115,16 @@ int adicionar_soc(SOCIOS *soc)
 /// \param numero de socio
 /// \param data de nascimento
 /// \param contacto
-int modificar_soc (SOCIOS *soc)
+int modificar_soc (SOCIO *soc)
 {
     int n;
     long int alterar;
     char escolha;
-    
+
     system("cls");
     printf("Qual o numero de socio que quer alterar?");
     scanf("%ld",&alterar);
-    for(n=1;n<NA;n++)
+    for(n=1;n<NS;n++)
     {
                      if(soc[n].num_soc==alterar)
                      {
@@ -135,46 +136,47 @@ int modificar_soc (SOCIOS *soc)
                                                 switch(escolha)
                                                 {
                                                                case '1':
-                                                                    {  system("cls")
+                                                                    {  system("cls");
                                                                        printf("Qual a nova morada?");
                                                                        scanf("%s",soc[n].morada);
                                                                        getch(); return(1);
                                                                        break;
                                                                     }
                                                                case '2':
-                                                                    {  system("cls")
+                                                                    {  system("cls");
                                                                        printf("Qual o novo contacto?");
                                                                        scanf("%ld",soc[n].contacto);
                                                                        getch(); return(1);
                                                                        break;
                                                                     }
                                                                case '3':
-                                                                    {  system("cls")
+                                                                    {  system("cls");
                                                                        printf("Qual a nova morada?");
                                                                        scanf("%s",soc[n].morada);
                                                                        printf("Qual o novo contacto?");
                                                                        scanf("%ld",soc[n].contacto);
                                                                        getch(); return(1);
                                                                        break;
-                                                                    }  
+                                                                    }
                                                                case 's': case 'S': exit(0);
-                                                               } 
-               }   
-     printf("ERRO!! NUMERO DE SOCIO NAO ENCONTRADO!"); getch(); return(0);                                                           
-                                                                              
-                                                
+                                                               }
+               }
+     printf("ERRO!! NUMERO DE SOCIO NAO ENCONTRADO!"); getch(); return(0);
+
+
+}
 }
 /// funcao para remover socio
-void remover_soc(SOCIO *soc)
+int remover_soc(SOCIO *soc)
 {
      char confere;
      int n;
      long int eliminar;
-     
+
      system("cls");
      printf("Qual o numero de socio que pretende eliminar?");
      scanf("%d",&eliminar);
-     for(n=1;n<NA;n++)
+     for(n=1;n<NS;n++)
      {
                       if(soc[n].num_soc==eliminar)
                       {
@@ -182,51 +184,51 @@ void remover_soc(SOCIO *soc)
                                                  printf("Tem a certeza que pretende eliminar o socio? Sim[S] Nao[N]");
                                                  scanf("%c",&confere);
                                                  if(confere!='S' && confere!='s')
-                                                                 return(0)
+                                                                 return(0);
                                                  else
                                                   {
                                                                  soc[n].estado=0;
-                                                                 printf("\n \n SOCIO ELIMMINADO <ENTER para continuar>");
+                                                                 printf("\n \n SOCIO ELIMINADO <ENTER para continuar>");
                                                                  getch();
                                                                  return(1);
                                                   }
                       }
      }
      printf("ERRO! SOCIO NÃO ENCONTRADO <ENTER para continuar>");
-     getch(); return(0);                                                                                                     
-     
+     getch(); return(0);
+
  }
 /// funcao para gravar no ficheiro
 void gravar_ficheiro(SOCIO *soc)
 {
      int n;
      FILE *fs;
-     
+
      fs=fopen("socios.txt","w");
-     for(n=1;n<NA;n++)
+     for(n=1;n<NS;n++)
      {
                       if(soc[n].estado==1)
                       fprintf(fs," %d\n %s\n %ld\n %s\n %ld\n",soc[n].num_soc,soc[n].nome,soc[n].dt_nasc,soc[n].morada,soc[n].contacto);
      }
      printf("\n\n GRAVADO COM SUCESSO!!\n<ENTER para continuar>");
-     getch(); fclose(fs);                
+     getch(); fclose(fs);
  }
 /// funcao para ler do ficheiro
-void ler_ficheiro(SOCIOS *soc)
+int ler_ficheiro(SOCIO *soc)
 {
      int n;
      FILE *fs;
-     
+
      if(!(fs=fopen("socios.txt","r")))
 	{
 		printf("Erro na Abertura de Leitura <Enter para Sair>");
         getch(); exit(0);
 	}
-	for(n=1;n<NA;n++)
+	for(n=1;n<NS;n++)
 	                 fscanf(fs," %d\n %s\n %ld\n %s\n %ld\n %d",&soc[n].num_soc,&soc[n].nome,&soc[n].dt_nasc,&soc[n].morada,&soc[n].contacto,&soc[n].estado);
-	fclose(fa);
+	fclose(fs);
 	printf("\n\n LIDO COM SUCESSO <Enter para Continuar>");
-    getch();return(1)
+    getch();return(1);
  }
 
 
