@@ -25,7 +25,7 @@ int menu_filmes()
                 inserir_filme();
                 break;
             case 'C':
-                //remover();
+                apagar_filme();
                 printf("\nC - Remover filme");
                 break;
             case 'S': return;
