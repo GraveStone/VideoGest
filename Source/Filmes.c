@@ -127,7 +127,6 @@ int apagar_filme()
     int n_fil,teste;
     fpos_t filepos;
 
-
     system("CLS");
     fp_fil=fopen("filmes.txt","r+b");
     if(!fp_fil)
