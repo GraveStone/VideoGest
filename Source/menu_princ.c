@@ -1,3 +1,6 @@
+///\file
+///\brief Função menu_princ() - Menu principal do programa.
+///\details A função menu_princ() permite-nos ir para os menus dos Sócios, Filmes, Alugueres e Sair do programa.
 void menu_princ(void)
 {
     char op;

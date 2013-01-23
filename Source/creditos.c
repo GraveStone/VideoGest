@@ -1,3 +1,7 @@
+///\file
+///\brief Função creditos() - apresenta no ecran informações sobre o trabalho.
+///\details Na função creditos() apresenta o nome do trabalho e os membros que o elaboram e os docentes responsaveís.
+
 void creditos(void)
 {
     system("CLS");

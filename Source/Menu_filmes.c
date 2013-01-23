@@ -1,5 +1,7 @@
-/// funcao que mostra um menu para fazer cada uma das opera�oes: ver, adicionar, remover.
-///\param
+///\file
+///\brief função menu_filmes()- menu para os filmes
+///\details Função que mostra um menu para fazer cada uma das operações: ver, adicionar, remover.
+
 int menu_filmes()
 {
     char op;
@@ -19,14 +21,12 @@ int menu_filmes()
         {
             case 'A':
                  ver_filmes();
-                 printf("\nA - Ver lista de filmes");
-                break;
+                 break;
             case 'B':
                 inserir_filme();
                 break;
             case 'C':
                 apagar_filme();
-                printf("\nC - Remover filme");
                 break;
             case 'S': return;
         }

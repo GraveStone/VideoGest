@@ -1,3 +1,7 @@
+///\file
+///\brief função menu_aluguer()- menu para o aluguer
+///\details Função que mostra um menu para fazer cada uma das operações: alugar, devolver, .
+
 int menu_aluguer(void)
 {
     char op;
