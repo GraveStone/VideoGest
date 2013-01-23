@@ -14,7 +14,7 @@ typedef struct
 filme aux_fil;
 
 
-/// Função para inserir um novo filme.
+/// FunÃ§Ã£o para inserir um novo filme.
 
 int inserir_filme()
 {
@@ -69,7 +69,7 @@ int inserir_filme()
     fclose(fp_fil);
 }
 
-/// Função para ver filmes
+/// FunÃ§Ã£o para ver filmes
 
 
 int ver_filmes(void)
@@ -101,10 +101,10 @@ int ver_filmes(void)
     teste=fread(&aux_fil,sizeof(filme),1,fp_ver_fil);
     if(teste==1)
      {
-      if(aux_fil.estado==1)
-      {
+     if(aux_fil.estado==1)
+     {
          printf("\n%d\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
-      }
+     }
      }
    }
   while(!feof(fp_ver_fil));
@@ -113,17 +113,53 @@ int ver_filmes(void)
 }
 
 
-/// Função para modificar filme.
+/// FunÃ§Ã£o para modificar filme.
 
 int modificar_filme()
 {
 }
 ///Apagar filme
 
-int apagar_filme( )
+int apagar_filme()
 {
+    FILE *fp_fil;
+    char op;
+    int n_fil,teste;
+    fpos_t filepos;
 
+    system("CLS");
+    fp_fil=fopen("filmes.txt","r+b");
+    if(!fp_fil)
+    {
+        printf("\n\t Erro de abertura do Ficheiro!!");
+        getch();
+        return;
+    }
+
+    printf("Insira o numero do filme a eliminar: ");
+    scanf("%d",&n_fil);
+    rewind(fp_fil);
+    do
+    {
+    fgetpos(fp_fil,&filepos);
+    teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+    if(teste==1)
+    {
+        if(aux_fil.num_filme==n_fil)
+         {
+              aux_fil.estado=0;
+              fsetpos(fp_fil,&filepos);
+              fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+              fclose(fp_fil);
+              return;
+        }
+    }
+    }
+    while(!feof(fp_fil));
+    fclose(fp_fil);
 }
+
+
 
 
 int filme_existe(long int n_filme)
