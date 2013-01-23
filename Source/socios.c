@@ -38,6 +38,43 @@ int ver_lista()
 
     } while (!feof(fp_ver));
  }
+ 
+///funcao para ver que socio existe 
+ int socio_existe(long int n_soc)
+{
+  FILE *fp_soc;
+  int teste;
+
+  system("cls");
+  fp_fil=fopen("socios.txt","rb");
+  if(!fp_soc)
+   {
+    printf("\n\t Erro na leitura do Ficheiro!!");
+    getch();
+    return 0;
+   }
+   do
+   {
+        teste=fread(&aux_soc,sizeof(SOCIO),1,fp_soc);
+        if(teste==1)
+        {
+            if(aux_soc.num_soc==n_soc)
+            {
+               fclose(fp_fil);
+               return 1;
+            }
+        }
+    }
+    while(!feof(fp_fil));
+    getch();
+    fclose(fp_fil);
+    return 0;
+}
+
+ 
+ 
+ 
+ 
 /// funcao para adicionar socio
 /// \param nome do socio
 /// \param morada
