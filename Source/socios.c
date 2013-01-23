@@ -81,34 +81,60 @@ int ver_lista()
 /// \param contacto
 int adicionar_soc(SOCIO *soc)
 {
-    int n;
-    long int inserir;
+   FILE *fp_soc;
+    char op;
+    int n_reg;
 
-    system ("cls");
-    printf("Qual o número de sócio que quer inserir? ");
-    scanf("%ld",&inserir);
-    for(n=1;n<NS;n++)
+    system("CLS");
+    fp_soc=fopen("socios.txt","a+b");
+    if(!fp_soc)
     {
-                     if(soc[n].estado!=1)
-                     {
-                                         soc[n].num_soc=inserir;
-                                         printf("\n Nome do socio: ");
-                                         scanf("%s",soc[n].nome);
-                                         printf("\n Data de nascimento: ");
-                                         scanf("%s",soc[n].dt_nasc);
-                                         printf("\n Morada: ");
-                                         scanf("%s",soc[n].morada);
-                                         printf("\n Contacto: ");
-                                         scanf("%ld",soc[n].contacto);
-                                         printf("\n\n\n SOCIO ADICIONADO COM SUCESSO!!");
-                                         getch();
-                                         return(1);
-                     }
-     printf("ERRO!! NÃO É POSSÍVEL INSERIR SOCIO!");
-     getch();
-     return(0);
+        printf("\n\t Erro a criar o Ficheiro!!");
+        getch();
+        return;
+    }
+    do
+    {
+    fseek(fp_soc,0L,SEEK_END);
+    n_reg=(ftell(fp_soc))/sizeof(SOCIO);
+    rewind(fp_soc);
+    if(n_reg==0)
+    {
+     aux_soc.num_soc=n_reg+1;
+    }
+    aux_soc.num_soc=n_reg+1;
+    system("CLS");
+    printf("\n                  Ficha de Socio:");
+    printf("\n\nNumero do socio:%d",aux_soc.num_soc);
+    printf("\n\nInsira nome do socio:\n");
+    rewind(stdin);
+    gets(aux_soc.nome);
+    printf("\nInserir data de nascimento: ");
+    scanf("%ld",&aux_soc.dt_nasc);
+    printf("\n\nInsira a morada: ");
+    rewind(stdin);
+    gets(aux_soc.morada);
+    printf("\nInsira contacto: ");
+    scanf("%ld",&aux_soc.contacto);
+    aux_soc.estado=1;
+    fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
+    rewind(stdin);  // para limpar o buffer do teclado
+    do
+    {
+    printf("\nQuer inserir outro Contacto?\n\n S-SIM\n N-NAO");
+    op=toupper(getch());
+    if(op!='S' && op!='N')
+    {
+      printf("\ntecla nao e valida");
+    }
+    }
+    while(op!='S' && op!='N');
+    }
+    while(op!='N');
+    fclose(fp_soc);
 }
-}
+
+
 /// funcao para modificar a ficha de socio
 /// \param nome do socio
 /// \param morada
@@ -169,35 +195,43 @@ int modificar_soc (SOCIO *soc)
 /// funcao para remover socio
 int remover_soc(SOCIO *soc)
 {
-     char confere;
-     int n;
-     long int eliminar;
+   FILE *fp_soc;
+    char op;
+    int n_soc,teste;
+    fpos_t filepos;
 
-     system("cls");
-     printf("Qual o numero de socio que pretende eliminar?");
-     scanf("%d",&eliminar);
-     for(n=1;n<NS;n++)
-     {
-                      if(soc[n].num_soc==eliminar)
-                      {
-                                                 printf("\n Nome:%s\n Data de nascimento:%ld\n Morada:%s\n Contacto:%ld\n",soc[n].nome,soc[n].dt_nasc,soc[n].morada,soc[n].contacto);
-                                                 printf("Tem a certeza que pretende eliminar o socio? Sim[S] Nao[N]");
-                                                 scanf("%c",&confere);
-                                                 if(confere!='S' && confere!='s')
-                                                                 return(0);
-                                                 else
-                                                  {
-                                                                 soc[n].estado=0;
-                                                                 printf("\n \n SOCIO ELIMINADO <ENTER para continuar>");
-                                                                 getch();
-                                                                 return(1);
-                                                  }
-                      }
-     }
-     printf("ERRO! SOCIO NÃO ENCONTRADO <ENTER para continuar>");
-     getch(); return(0);
+    system("CLS");
+    fp_soc=fopen("socios.txt","r+b");
+    if(!fp_soc)
+    {
+        printf("\n\t Erro de abertura do Ficheiro!!");
+        getch();
+        return;
+    }
 
- }
+    printf("Insira o numero do socio a eliminar: ");
+    scanf("%d",&n_soc);
+    rewind(fp_soc);
+    do
+    {
+    fgetpos(fp_soc,&filepos);
+    teste=fread(&aux_soc,sizeof(SOCIO),1,fp_soc);
+    if(teste==1)
+    {
+        if(aux_soc.num_soc==n_soc)
+         {
+              aux_soc.estado=0;
+              fsetpos(fp_soc,&filepos);
+              fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
+              fclose(fp_soc);
+              return;
+        }
+    }
+    }
+    while(!feof(fp_soc));
+    fclose(fp_soc);
+}
+
 /// funcao para gravar no ficheiro
 void gravar_ficheiro(SOCIO *soc)
 {

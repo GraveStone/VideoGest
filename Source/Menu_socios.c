@@ -14,7 +14,8 @@ int menu_socios()
         printf("\n\n\t\t\t Menu Socios");
         printf("\n\n\t\tA - Ver lista de socios");
         printf("\n\t\tB - Adicionar socio");
-        printf("\n\t\tC - Remover socio");
+        printf("\n\t\tC - Modificar socio");
+        printf("\n\t\tD - Remover socio");
         printf("\n\t\tS - Voltar ao Menu Principal");
         op=toupper(getch());
         switch(op)
@@ -28,7 +29,11 @@ int menu_socios()
                 printf("Adicionar socio");
                 break;
             case 'C':
-                //remover();
+                modificar_soc();
+                printf("Modificar socio");
+                break;
+            case 'D':
+                remover_soc();
                 printf("Remover socio");
                 break;
             case 'S': return;
