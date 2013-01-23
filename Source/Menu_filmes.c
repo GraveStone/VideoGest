@@ -1,5 +1,5 @@
 ///\file
-///\brief função menu_filmes()- menu para os filmes
+///\brief função menu_filmes() - menu para os filmes
 ///\details Função que mostra um menu para fazer cada uma das operações: ver, adicionar, remover.
 
 int menu_filmes()

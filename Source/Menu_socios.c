@@ -1,5 +1,5 @@
 ///\file
-///\brief função menu_socios()- menu para os Sócios
+///\brief função menu_socios() - menu para os Sócios
 ///\details Função que mostra um menu para fazer cada uma das operações: alugar, devolver, remover .
 
 int menu_socios()
