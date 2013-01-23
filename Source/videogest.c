@@ -11,19 +11,17 @@
 #include"aluguer.c"
 #include"socios.c"
 #include"filmes.c"
-
 ///\file
-///\brief VideoGest - Gestão de videoclube
-///\details VideoGest - programa de gestão de videoclube para gerir os socios, filmes e alugueres
-///\authors Nelson Fernandes N.º 15390
-///\authors Rita Serra       N.º 47086
-///\authors Marta Santos     N.º 47181
+///\brief VideoGest - GestÃ£o de videoclube
+///\details VideoGest - programa de gestÃ£o de videoclube para gerir os socios, filmes e alugueres
+///\authors Nelson Fernandes N.Âº 15390
+///\authors Rita Serra       N.Âº 47086
+///\authors Marta Santos     N.Âº 47181
 ///\date Jan. 2013
 ///\version 1.0
 ///\copyright NRM
-
-///\brief main() nesta função é iniciado o programa com a chamada das funções creditos() e menu_princ()
-
+///\brief main() funÃ§Ã£o principal para execuÃ§Ã£o do programa
+///\details main() nesta funÃ§Ã£o Ã© iniciado o programa com a chamada das funÃ§Ãµes creditos() e menu_princ()
 int main()
 {
     creditos();
@@ -33,4 +31,3 @@ int main()
     printf("The end");
     getch();
 }
-
