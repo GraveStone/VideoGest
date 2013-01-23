@@ -12,6 +12,18 @@
 #include"socios.c"
 #include"filmes.c"
 
+///\file
+///\brief VideoGest - Gestão de videoclube
+///\details VideoGest - programa de gestão de videoclube para gerir os socios, filmes e alugueres
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
+
+///\brief main() nesta função é iniciado o programa com a chamada das funções creditos() e menu_princ()
+
 int main()
 {
     creditos();
