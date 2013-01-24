@@ -67,64 +67,14 @@ int aluguer()
        }
     }
     while(aux_al.num_filme!=n_filme);
-    printf("\nData:\n\nInsira a DATA formato aaaa-mm-dd:\n\nANO:");
-    scanf("%d",&aux_al.data_lev.ano);
-    printf("\n\nInsira o MES:");
-    getchar();
-    do
-    {
-     scanf("%d",&aux_al.data_lev.mes);
-    }
-    while(aux_al.data_lev.mes<=0||aux_al.data_lev.mes>12);
-    printf("\n\nInsira o dia:");
-    if(aux_al.data_lev.mes==2)
-    {
-        if ( ( (!(aux_al.data_lev.ano % 4)) && (aux_al.data_lev.ano % 100) ) || (!(aux_al.data_lev.ano % 400)) )
-        {
-            do
-            {
-                scanf("%d",&aux_al.data_lev.dia);
-            }
-            while(aux_al.data_lev.dia<=0||aux_al.data_lev.dia>29);
-            bissexto=1;
-        }
-        else
-        {
-            do
-            {
-                scanf("%d",&aux_al.data_lev.dia);
-            }
-            while(aux_al.data_lev.dia<=0||aux_al.data_lev.dia>28);
-            bissexto=0;
-        }
-    }
-    else
-    {
-        if(aux_al.data_lev.mes==1 || aux_al.data_lev.mes==3 || aux_al.data_lev.mes==5 || aux_al.data_lev.mes==7 || aux_al.data_lev.mes==8 || aux_al.data_lev.mes==10 || aux_al.data_lev.mes==12)
-        {
-            do
-            {
-                scanf("%d",&aux_al.data_lev.dia);
-            }
-            while(aux_al.data_lev.dia<=0||aux_al.data_lev.dia>31);
-        }
-        else
-        {
-            do
-
-
-            {
-                scanf("%d",&aux_al.data_lev.dia);
-            }
-            while(aux_al.data_lev.dia<=0||aux_al.data_lev.dia>30);
-        }
-    }
+    printf("\nData:\n\nInsira a DATA de Aluguer formato aaaa-mm-dd:\n\nANO:");
+    ins_data(&aux_al.data_lev.ano,&aux_al.data_lev.mes,&aux_al.data_lev.dia);
     aux_al.estado=1;
     fwrite(&aux_al,sizeof(ALUGAR),1,fp_al);
     rewind(stdin);
     do
     {
-    printf("\nQuer inserir outro Socio?\n\n S-SIM\n N-NAO");
+    printf("\nQuer Alugar outro filme?\n\n S-SIM\n N-NAO");
     op=toupper(getch());
     if(op!='S' && op!='N')
     {
@@ -188,56 +138,8 @@ int devolucao()
         {
             if(aux_al.num_filme==dev)
             {
-                printf("\nData:\n\nInsira a DATA formato aaaa-mm-dd:\n\nANO:");
-                scanf("%d",&aux_al.data_ent.ano);
-                printf("\n\nInsira o MES:");
-                getchar();
-                do
-                {
-                    scanf("%d",&aux_al.data_ent.mes);
-                }
-                while(aux_al.data_ent.mes<=0||aux_al.data_ent.mes>12);
-                printf("\n\nInsira o dia:");
-                if(aux_al.data_ent.mes==2)
-                {
-                if ( ( (!(aux_al.data_ent.ano % 4)) && (aux_al.data_ent.ano % 100) ) || (!(aux_al.data_ent.ano % 400)) )
-                {
-                do
-                {
-                    scanf("%d",&aux_al.data_ent.dia);
-                }
-                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>29);
-                bissexto=1;
-                }
-                else
-                {
-                do
-                {
-                scanf("%d",&aux_al.data_ent.dia);
-                }
-                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>28);
-                bissexto=0;
-                }
-                }
-                else
-                {
-                if(aux_al.data_ent.mes==1 || aux_al.data_ent.mes==3 || aux_al.data_ent.mes==5 || aux_al.data_ent.mes==7 || aux_al.data_ent.mes==8 || aux_al.data_ent.mes==10 || aux_al.data_ent.mes==12)
-                {
-                do
-                {
-                scanf("%d",&aux_al.data_ent.dia);
-                }
-                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>31);
-                }
-                else
-                {
-                do
-                {
-                scanf("%d",&aux_al.data_ent.dia);
-                }
-                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>30);
-                }
-                }
+                printf("\nData:\n\nInsira a DATA devolução formato aaaa-mm-dd:\n\nANO:");
+                ins_data(&aux_al.data_ent.ano,&aux_al.data_ent.mes,&aux_al.data_ent.dia);
                 aux_al.dias=num_dias(aux_al.data_lev.ano,aux_al.data_ent.ano,aux_al.data_lev.mes,aux_al.data_ent.mes,aux_al.data_lev.dia,aux_al.data_ent.dia);
                 aux_al.estado=0;
                 fsetpos(fp_ver,&filepos);

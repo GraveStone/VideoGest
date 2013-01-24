@@ -12,6 +12,7 @@
 #include"socios.c"
 #include"filmes.c"
 #include"calculo_dias.c"
+#include"ins_data.c"
 ///\file
 ///\brief VideoGest - Gestão de videoclube ficheiro principal para execução do programa
 ///\details VideoGest - programa de gestão de videoclube para gerir os socios, filmes e alugueres
