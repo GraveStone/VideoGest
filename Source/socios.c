@@ -28,19 +28,21 @@ int ver_lista()
         getch();
         return;
     }
-
-    printf("nome: \t morada: \t numero de socio: \t data de nascimento: \t contacto: \t estado:");
+    system("cls");
+    printf("numero de socio \tnome: \t morada \t data de nascimento: \t contacto: \t estado:");
     do
     {
      teste=fread(&aux_soc,sizeof(SOCIO),1,fp_ver);
     if(teste==1)
     {
-        system("cls");
-        printf("\n %d\t%s \t %s\t %ld\t %d",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto,aux_soc.estado);
-        getch();
+    if(aux_soc.estado==1)
+    {
+        printf("\n%d\t%s\t%s\t%ld\t%ld\t%d",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto,aux_soc.estado);
     }
-
-    } while (!feof(fp_ver));
+    }
+    }
+    while (!feof(fp_ver));
+    getch();
  }
 
 ///funcao para ver que socio existem
@@ -124,7 +126,7 @@ int adicionar_soc(SOCIO *soc)
     rewind(stdin);  // para limpar o buffer do teclado
     do
     {
-    printf("\nQuer inserir outro Contacto?\n\n S-SIM\n N-NAO");
+    printf("\nQuer inserir outro Socio?\n\n S-SIM\n N-NAO");
     op=toupper(getch());
     if(op!='S' && op!='N')
     {

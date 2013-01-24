@@ -36,7 +36,7 @@ int aluguer()
     printf("\nFicha de Aluger:");
     printf("\n\nInsira o numero de Socio:");
     scanf("%d",&n_socio);
-    /*do
+    do
     {
        a=socio_existe(n_socio);
        if(a==0)
@@ -50,7 +50,7 @@ int aluguer()
        }
     }
     while(aux_al.num_socio!=n_socio);
-    */printf("\n\nInsira o numero de Filme:");
+    printf("\n\nInsira o numero de Filme:");
     scanf("%d",&n_filme);
     do
     {
@@ -121,8 +121,16 @@ int aluguer()
     aux_al.estado=1;
     fwrite(&aux_al,sizeof(ALUGAR),1,fp_al);
     rewind(stdin);
-    printf("Continuar o aluguer");
+    do
+    {
+    printf("\nQuer inserir outro Socio?\n\n S-SIM\n N-NAO");
     op=toupper(getch());
+    if(op!='S' && op!='N')
+    {
+      printf("\ntecla nao e valida");
+    }
+    }
+    while(op!='S' && op!='N');
     }
     while(op!='N');
     fclose(fp_al);
@@ -131,7 +139,8 @@ int aluguer()
 int devolucao()
 {
     FILE *fp_ver;
-    int teste,n_reg,dev;
+    int teste,n_reg,dev, bissexto;
+    fpos_t filepos;
 
     system("cls");
     fp_ver=fopen("alugados.txt","r+b");
@@ -162,6 +171,83 @@ int devolucao()
             if(aux_al.num_socio==dev)
             {
                printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+            }
+        }
+    }
+    while(!feof(fp_ver));
+    rewind(fp_ver);
+    printf("Qual o Numero de filme para devolucao:");
+    scanf("%d",&dev);
+    printf("\nN§ filme\tSocio");
+    do
+    {
+        fgetpos(fp_ver,&filepos);
+        teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
+        if(teste==1)
+        {
+            if(aux_al.num_filme==dev)
+            {
+                printf("\nData:\n\nInsira a DATA formato aaaa-mm-dd:\n\nANO:");
+                scanf("%d",&aux_al.data_ent.ano);
+                printf("\n\nInsira o MES:");
+                getchar();
+                do
+                {
+                    scanf("%d",&aux_al.data_ent.mes);
+                }
+                while(aux_al.data_ent.mes<=0||aux_al.data_ent.mes>12);
+                printf("\n\nInsira o dia:");
+                if(aux_al.data_ent.mes==2)
+                {
+                if ( ( (!(aux_al.data_ent.ano % 4)) && (aux_al.data_ent.ano % 100) ) || (!(aux_al.data_ent.ano % 400)) )
+                {
+                do
+                {
+                    scanf("%d",&aux_al.data_ent.dia);
+                }
+                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>29);
+                bissexto=1;
+                }
+                else
+                {
+                do
+                {
+                scanf("%d",&aux_al.data_ent.dia);
+                }
+                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>28);
+                bissexto=0;
+                }
+                }
+                else
+                {
+                if(aux_al.data_ent.mes==1 || aux_al.data_ent.mes==3 || aux_al.data_ent.mes==5 || aux_al.data_ent.mes==7 || aux_al.data_ent.mes==8 || aux_al.data_ent.mes==10 || aux_al.data_ent.mes==12)
+                {
+                do
+                {
+                scanf("%d",&aux_al.data_ent.dia);
+                }
+                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>31);
+                }
+                else
+                {
+                do
+
+
+                {
+                scanf("%d",&aux_al.data_ent.dia);
+                }
+                while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>30);
+                }
+                }
+
+
+                aux_al.estado=0;
+                fsetpos(fp_ver,&filepos);
+                fwrite(&aux_al,sizeof(ALUGAR),1,fp_ver);
+                printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+                fclose(fp_ver);
+                getch();
+                return;
             }
         }
     }
