@@ -1,4 +1,10 @@
-
+///\file
+///\brief Função ins_data() - Insere a data no formato AAAA-MM-DD.
+///\details Esta função tem como objectivo de inserir a data quando é solicitada retornando a data por meio de Apontadores.
+///\param *year Apontador usado para devolver o ano.
+///\param *month Apontador usado para devolver o mês.
+///\param *day Apontador usado para devolver o dia.
+///\return Retorna a data por meio de Apontadores.
 int ins_data (long int *year, int *month, int *day)
 {
     int bissexto,mon,da;
