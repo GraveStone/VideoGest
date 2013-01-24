@@ -9,7 +9,8 @@ typedef struct
 {
     int num_filme, num_socio;
     DATA data_lev, data_ent;
-    int dias, estado;
+    int estado;
+    long int dias;
 }
 ALUGAR;
 
@@ -231,20 +232,17 @@ int devolucao()
                 else
                 {
                 do
-
-
                 {
                 scanf("%d",&aux_al.data_ent.dia);
                 }
                 while(aux_al.data_ent.dia<=0||aux_al.data_ent.dia>30);
                 }
                 }
-
-
+                aux_al.dias=num_dias(aux_al.data_lev.ano,aux_al.data_ent.ano,aux_al.data_lev.mes,aux_al.data_ent.mes,aux_al.data_lev.dia,aux_al.data_ent.dia);
                 aux_al.estado=0;
                 fsetpos(fp_ver,&filepos);
                 fwrite(&aux_al,sizeof(ALUGAR),1,fp_ver);
-                printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+                printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %ld",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,aux_al.dias);
                 fclose(fp_ver);
                 getch();
                 return;
@@ -285,7 +283,7 @@ int ver_alugados(void)
     teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
     if(teste==1)
      {
-      printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+      printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %ld",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,aux_al.dias);
      }
    }
   while(!feof(fp_ver));
