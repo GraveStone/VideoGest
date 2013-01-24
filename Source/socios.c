@@ -28,13 +28,16 @@ int ver_lista()
         getch();
         return;
     }
-    printf("nome: \n morada: \n numero de socio: \n data de nascimento: \n contacto: \n estado:");
+
+    printf("nome: \t morada: \t numero de socio: \t data de nascimento: \t contacto: \t estado:");
     do
     {
      teste=fread(&aux_soc,sizeof(SOCIO),1,fp_ver);
     if(teste==1)
     {
-        printf("\n %s\n %s\n %ld\n %ld\n %d",aux_soc.nome,aux_soc.morada,aux_soc.num_soc,aux_soc.dt_nasc,aux_soc.contacto,aux_soc.estado);
+        system("cls");
+        printf("\n %d\t%s \t %s\t %ld\t %d",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto,aux_soc.estado);
+        getch();
     }
 
     } while (!feof(fp_ver));
