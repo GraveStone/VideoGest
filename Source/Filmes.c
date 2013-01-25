@@ -3,7 +3,9 @@
 #define Mgenero 20
 typedef struct
 {
+        /// ID do filme na base de dados
         int num_filme;
+        /// ID do filme na base de dados
         char nome[Mnome];
         int duracao;
         char genero[Mgenero];
@@ -117,7 +119,123 @@ int ver_filmes(void)
 
 int modificar_filme()
 {
+
+    FILE *fp_fil;
+    int alterar,teste;
+    char op;
+    fpos_t filepos;
+
+    system("CLS");
+    fp_fil=fopen("filmes.txt","r+b");
+    if(!fp_fil)
+    {
+        printf("\n\t Erro de abertura do Ficheiro!!");
+        getch();
+        return;
+    }
+    system("cls");
+    printf("Qual o numero de filme que quer alterar?");
+    scanf("%d",&alterar);
+    rewind(fp_fil);
+    do
+    {
+    fgetpos(fp_fil,&filepos);
+    teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+    if(teste==1)
+    {
+        if(aux_fil.num_filme==alterar)
+         {
+
+                                                printf("\nN.filme\tTitulo\tDuracao\tGenero\tEstado");
+                                                printf("\n%d\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
+                                                printf("\nApenas pode ser modificado o Titulo, Duracao e Genero");
+                                                getch(); printf("Prima ENTER para continuar");
+                                                system("cls");
+                                                do
+                                                {
+                                                printf("\nPretende alterar:\n[A] Titulo\n[B] Duracao\n[C] Genero \n[D] Todos\n [S]SAIR ");
+                                                op=toupper(getch());
+                                                switch(op)
+                                                {
+                                                    printf("\nPretende alterar:\n[A] Titulo\n[B] Duracao\n[C] Genero \n[D] Todos\n [S]SAIR ");
+                                                               case 'A':
+                                                                   {
+                                                                        system("cls");
+                                                                        printf("\n\nInsira o nome do filme:\n");
+                                                                        rewind(stdin);
+                                                                        gets(aux_fil.nome);
+                                                                        break;
+                                                                   }
+
+
+                                                               case 'B':
+                                                                    {
+
+                                                                        printf("\nInserir a duracao do filme:");
+                                                                        scanf("%ld",&aux_fil.duracao);
+                                                                        getch();
+                                                                        break;
+                                                                    }
+
+                                                               case 'C':
+                                                                   {
+
+
+
+                                                                        system("cls");
+                                                                        printf("\n\nInsira o genero:");
+                                                                        rewind(stdin);
+                                                                        gets(aux_fil.genero);
+                                                                        getch();
+                                                                        break;
+                                                                    }
+
+                                                                case 'D':
+                                                                        {
+                                                                        printf("\n\nInsira o nome do filme:\n");
+                                                                        rewind(stdin);
+                                                                        gets(aux_fil.nome);
+                                                                        printf("\nInserir a duracao do filme:");
+                                                                        scanf("%ld",&aux_fil.duracao);
+                                                                        printf("\n\nInsira o genero:");
+                                                                        rewind(stdin);
+                                                                        gets(aux_fil.genero);
+                                                                        getch();
+                                                                        break;
+                                                                        }
+
+                                                               case 'S':
+                                                                   {
+                                                                    fsetpos(fp_fil,&filepos);
+                                                                    fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                                                                    fclose(fp_fil);
+                                                                    return;
+                                                                   }
+
+               }
+
+     printf("ERRO!! NUMERO DE FILME NAO ENCONTRADO!");
+     getch();
+
+     //return(0);
+
+             /* aux_fil.estado=0;
+              fsetpos(fp_fil,&filepos);
+              fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+              fclose(fp_fil);
+              return;*/
+        }
+        while(op!='S');
+   }
+
 }
+}
+ while(!feof(fp_fil));
+    fclose(fp_fil);
+}
+
+
+
 ///Apagar filme
 
 int apagar_filme()
@@ -158,7 +276,6 @@ int apagar_filme()
     while(!feof(fp_fil));
     fclose(fp_fil);
 }
-
 
 
 
