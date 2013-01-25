@@ -1,12 +1,5 @@
 typedef struct
 {
-    long int ano;
-    int mes, dia;
-}
-DATA;
-
-typedef struct
-{
     int num_filme, num_socio;
     DATA data_lev, data_ent;
     int estado;
@@ -90,7 +83,7 @@ int aluguer()
 int devolucao()
 {
     FILE *fp_ver;
-    int teste,n_reg,dev, bissexto;
+    int teste,n_reg,dev, bissexto,alugado;
     fpos_t filepos;
 
     system("cls");
@@ -111,6 +104,28 @@ int devolucao()
         fclose(fp_ver);
         return;
     }
+    do
+    {
+        teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
+        if(teste==1)
+        {
+            if(aux_al.estado==1)
+            {
+               printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+               alugado++;
+            }
+        }
+    }
+    while(!feof(fp_ver));
+    rewind(fp_ver);
+    if(alugado==0)
+    {
+        printf("\n\t Nao ha filmes para devolver!!!");
+        getch();
+        fclose(fp_ver);
+        return;
+    }
+
     printf("Qual o Numero de Socio para devolucao:");
     scanf("%d",&dev);
     printf("\nN§ filme\tSocio");
@@ -138,9 +153,18 @@ int devolucao()
         {
             if(aux_al.num_filme==dev)
             {
+                do
+                {
                 printf("\nData:\n\nInsira a DATA devolução formato aaaa-mm-dd:\n\nANO:");
                 ins_data(&aux_al.data_ent.ano,&aux_al.data_ent.mes,&aux_al.data_ent.dia);
                 aux_al.dias=num_dias(aux_al.data_lev.ano,aux_al.data_ent.ano,aux_al.data_lev.mes,aux_al.data_ent.mes,aux_al.data_lev.dia,aux_al.data_ent.dia);
+                if(aux_al.dias<0)
+                {
+                    printf("\n Data de devolucao nao e valida!!! insira uma data valida");
+                }
+
+                }
+                while(aux_al.dias<0);
                 aux_al.estado=0;
                 fsetpos(fp_ver,&filepos);
                 fwrite(&aux_al,sizeof(ALUGAR),1,fp_ver);

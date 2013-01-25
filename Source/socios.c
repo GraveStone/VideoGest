@@ -1,13 +1,12 @@
 #define Mnome 50
 #define Mmorada 50
-#define NS 150 ///Define uma variavel global NS que é o numero total de sócios que o programa pode guardar
-/// Cria uma estrutura com os dados dos sócios
+/// Cria uma estrutura com os dados dos sÃ³cios
 typedef struct
 {
  char nome[Mnome];
  char morada[Mmorada];
  int num_soc;
- long int dt_nasc;
+ DATA dt_nasc;
  long int contacto;
  int estado;
 }SOCIO;
@@ -37,7 +36,7 @@ int ver_lista()
     {
     if(aux_soc.estado==1)
     {
-        printf("\n\t%d || %s || %s || %ld || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
+        printf("\n\t%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
     }
     }
     }
@@ -114,8 +113,8 @@ int adicionar_soc()
     printf("\n\nInsira nome do socio:\n");
     rewind(stdin);
     gets(aux_soc.nome);
-    printf("\nInserir data de nascimento: ");
-    scanf("%ld",&aux_soc.dt_nasc);
+    printf("\nInsira a DATA de nascimento formato aaaa-mm-dd:\n\nANO:");
+    ins_data(&aux_soc.dt_nasc.ano,&aux_soc.dt_nasc.mes,&aux_soc.dt_nasc.dia);
     printf("\n\nInsira a morada: ");
     rewind(stdin);
     gets(aux_soc.morada);
@@ -146,7 +145,7 @@ int adicionar_soc()
 /// \param numero de socio
 /// \param data de nascimento
 /// \param contacto
-int modificar_soc (SOCIO *soc)
+int modificar_soc ()
 {
 
     FILE *fp_soc;
@@ -155,7 +154,7 @@ int modificar_soc (SOCIO *soc)
     fpos_t filepos;
 
     system("CLS");
-    fp_soc=fopen("filmes.txt","r+b");
+    fp_soc=fopen("socios.txt","r+b");
     if(!fp_soc)
     {
         printf("\n\t Erro de abertura do Ficheiro!!");
@@ -163,7 +162,7 @@ int modificar_soc (SOCIO *soc)
         return;
     }
     system("cls");
-    printf("Qual o numero de sócio que quer alterar?");
+    printf("Qual o numero de socio que quer alterar?");
     scanf("%d",&alterar);
     rewind(fp_soc);
     do
@@ -175,20 +174,21 @@ int modificar_soc (SOCIO *soc)
         if(aux_soc.num_soc==alterar)
          {
 
-                                               printf("\n\t%d || %s || %s || %ld || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
-                                               printf("Apenas pode ser modificado a morada e o o contacto");getch(); printf("Prima ENTER para continuar");
+                                               printf("\n\t%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
+                                               printf("Apenas pode ser modificado a morada e o o contacto");
+                                               getch();
+                                               printf("Prima ENTER para continuar");
                                                system("cls");
-
                                                 do
                                                 {
-                                                printf("Pretende alterar:\n [A]Morada\n [B]Contacto\n [D]Ambos\n [S]SAIR ");
+                                                printf("Pretende alterar:\n [A] Morada\n [B] Contacto\n [C] Ambos\n [S] SAIR ");
                                                 op=toupper(getch());
                                                 switch(op)
                                                 {
                                                               case 'A':
                                                                    {
 
-                                                                        printf("\n\nInsira o nome do filme:\n");
+                                                                        printf("\n\nInsira a nova morada:\n");
                                                                         rewind(stdin);
                                                                         gets(aux_soc.morada);
                                                                         fsetpos(fp_soc,&filepos);
@@ -197,10 +197,9 @@ int modificar_soc (SOCIO *soc)
                                                                         return;
                                                                    }
 
-
                                                                case 'B':
                                                                     {
-                                                                       printf("\nInsira novo contacto: ");
+                                                                        printf("\nInsira novo contacto: ");
                                                                         scanf("%ld",&aux_soc.contacto);
                                                                         fsetpos(fp_soc,&filepos);
                                                                         fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
@@ -210,18 +209,16 @@ int modificar_soc (SOCIO *soc)
 
                                                                case 'C':
                                                                     {
-                                                                        printf("\n\nInsira o nome do filme:\n");
+                                                                        printf("\n\nInsira a nova morada:\n");
                                                                         rewind(stdin);
                                                                         gets(aux_soc.morada);
-                                                                        fsetpos(fp_soc,&filepos);
-                                                                        fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
                                                                         printf("\nInsira novo contacto: ");
                                                                         scanf("%ld",&aux_soc.contacto);
                                                                         fsetpos(fp_soc,&filepos);
                                                                         fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
                                                                         fclose(fp_soc);
                                                                         return;
-                                                                      
+
                                                                     }
 
                                                                case 'S':
@@ -244,9 +241,9 @@ int modificar_soc (SOCIO *soc)
 
 
 /// funcao para remover socio
-int remover_soc(SOCIO *soc)
+int remover_soc()
 {
-   FILE *fp_soc;
+    FILE *fp_soc;
     char op;
     int n_soc,teste;
     fpos_t filepos;
@@ -282,40 +279,3 @@ int remover_soc(SOCIO *soc)
     while(!feof(fp_soc));
     fclose(fp_soc);
 }
-
-/// funcao para gravar no ficheiro
-void gravar_ficheiro(SOCIO *soc)
-{
-     int n;
-     FILE *fs;
-
-     fs=fopen("socios.txt","w");
-     for(n=1;n<NS;n++)
-     {
-                      if(soc[n].estado==1)
-                      fprintf(fs," %d\n %s\n %ld\n %s\n %ld\n",soc[n].num_soc,soc[n].nome,soc[n].dt_nasc,soc[n].morada,soc[n].contacto);
-     }
-     printf("\n\n GRAVADO COM SUCESSO!!\n<ENTER para continuar>");
-     getch(); fclose(fs);
- }
-/// funcao para ler do ficheiro
-int ler_ficheiro(SOCIO *soc)
-{
-     int n;
-     FILE *fs;
-
-     if(!(fs=fopen("socios.txt","r")))
-	{
-		printf("Erro na Abertura de Leitura <Enter para Sair>");
-        getch(); exit(0);
-	}
-	for(n=1;n<NS;n++)
-	                 fscanf(fs," %d\n %s\n %ld\n %s\n %ld\n %d",&soc[n].num_soc,&soc[n].nome,&soc[n].dt_nasc,&soc[n].morada,&soc[n].contacto,&soc[n].estado);
-	fclose(fs);
-	printf("\n\n LIDO COM SUCESSO <Enter para Continuar>");
-    getch();return(1);
- }
-
-
-
-

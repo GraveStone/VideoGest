@@ -1,3 +1,11 @@
+typedef struct
+{
+    long int ano;
+    int mes, dia;
+}
+DATA;
+
+
 ///\file
 ///\authors Nelson Fernandes N.º 15390
 ///\authors Rita Serra       N.º 47086
