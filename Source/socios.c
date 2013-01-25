@@ -148,55 +148,101 @@ int adicionar_soc()
 /// \param contacto
 int modificar_soc (SOCIO *soc)
 {
-    int n;
-    long int alterar;
-    char escolha;
 
-    system("cls");
-    printf("Qual o numero de socio que quer alterar?");
-    scanf("%ld",&alterar);
-    for(n=1;n<NS;n++)
+    FILE *fp_soc;
+    int alterar,teste;
+    char op;
+    fpos_t filepos;
+
+    system("CLS");
+    fp_soc=fopen("filmes.txt","r+b");
+    if(!fp_soc)
     {
-                     if(soc[n].num_soc==alterar)
-                     {
-                                                printf("\n Nome:%s\n Data de nascimento:%ld\n Morada:%s\n Contacto:%ld\n",soc[n].nome,soc[n].dt_nasc,soc[n].morada,soc[n].contacto);
-                                                printf("Apenas pode ser modificado a morada e o o contacto");getch(); printf("Prima ENTER para continuar");
-                                                system("cls");
-                                                printf("Pretende alterar:\n [1]Morada\n [2]Contacto\n [3]Ambos\n [S]SAIR ");
-                                                scanf("%c",&escolha);
-                                                switch(escolha)
+        printf("\n\t Erro de abertura do Ficheiro!!");
+        getch();
+        return;
+    }
+    system("cls");
+    printf("Qual o numero de sócio que quer alterar?");
+    scanf("%d",&alterar);
+    rewind(fp_soc);
+    do
+    {
+    fgetpos(fp_soc,&filepos);
+    teste=fread(&aux_soc,sizeof(SOCIO),1,fp_soc);
+    if(teste==1)
+    {
+        if(aux_soc.num_soc==alterar)
+         {
+
+                                               printf("\n\t%d || %s || %s || %ld || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
+                                               printf("Apenas pode ser modificado a morada e o o contacto");getch(); printf("Prima ENTER para continuar");
+                                               system("cls");
+
+                                                do
                                                 {
-                                                               case '1':
-                                                                    {  system("cls");
-                                                                       printf("Qual a nova morada?");
-                                                                       scanf("%s",soc[n].morada);
-                                                                       getch(); return(1);
-                                                                       break;
+                                                printf("Pretende alterar:\n [A]Morada\n [B]Contacto\n [D]Ambos\n [S]SAIR ");
+                                                op=toupper(getch());
+                                                switch(op)
+                                                {
+                                                              case 'A':
+                                                                   {
+
+                                                                        printf("\n\nInsira o nome do filme:\n");
+                                                                        rewind(stdin);
+                                                                        gets(aux_soc.morada);
+                                                                        fsetpos(fp_soc,&filepos);
+                                                                        fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
+                                                                        fclose(fp_soc);
+                                                                        return;
+                                                                   }
+
+
+                                                               case 'B':
+                                                                    {
+                                                                       printf("\nInsira novo contacto: ");
+                                                                        scanf("%ld",&aux_soc.contacto);
+                                                                        fsetpos(fp_soc,&filepos);
+                                                                        fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
+                                                                        fclose(fp_soc);
+                                                                        return;
                                                                     }
-                                                               case '2':
-                                                                    {  system("cls");
-                                                                       printf("Qual o novo contacto?");
-                                                                       scanf("%ld",soc[n].contacto);
-                                                                       getch(); return(1);
-                                                                       break;
+
+                                                               case 'C':
+                                                                    {
+                                                                        printf("\n\nInsira o nome do filme:\n");
+                                                                        rewind(stdin);
+                                                                        gets(aux_soc.morada);
+                                                                        fsetpos(fp_soc,&filepos);
+                                                                        fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
+                                                                        printf("\nInsira novo contacto: ");
+                                                                        scanf("%ld",&aux_soc.contacto);
+                                                                        fsetpos(fp_soc,&filepos);
+                                                                        fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
+                                                                        fclose(fp_soc);
+                                                                        return;
+                                                                      
                                                                     }
-                                                               case '3':
-                                                                    {  system("cls");
-                                                                       printf("Qual a nova morada?");
-                                                                       scanf("%s",soc[n].morada);
-                                                                       printf("Qual o novo contacto?");
-                                                                       scanf("%ld",soc[n].contacto);
-                                                                       getch(); return(1);
-                                                                       break;
-                                                                    }
-                                                               case 's': case 'S': exit(0);
-                                                               }
+
+                                                               case 'S':
+                                                                   {
+                                                                    fclose(fp_soc);
+                                                                    return;
+                                                                   }
                }
-     printf("ERRO!! NUMERO DE SOCIO NAO ENCONTRADO!"); getch(); return(0);
 
+       }
+        while(op!='S');
+   }
 
 }
 }
+ while(!feof(fp_soc));
+    fclose(fp_soc);
+}
+
+
+
 /// funcao para remover socio
 int remover_soc(SOCIO *soc)
 {
