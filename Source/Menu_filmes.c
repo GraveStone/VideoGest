@@ -15,6 +15,7 @@ int menu_filmes()
         printf("\n\n\t\tA - Ver lista de filmes");
         printf("\n\t\tB - Adicionar filme");
         printf("\n\t\tC - Remover filme");
+        printf("\n\t\tD - Modificar filme");
         printf("\n\t\tS - Voltar ao Menu Principal");
         op=toupper(getch());
         switch(op)
@@ -27,6 +28,9 @@ int menu_filmes()
                 break;
             case 'C':
                 apagar_filme();
+                break;
+            case 'D':
+                modificar_filme();
                 break;
             case 'S': return;
         }
