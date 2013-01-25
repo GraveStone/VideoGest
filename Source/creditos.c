@@ -1,4 +1,10 @@
 ///\file
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
 ///\brief Função creditos() - apresenta no ecran informações sobre o trabalho.
 ///\details Na função creditos() apresenta o nome do trabalho e os membros que o elaboram e os docentes responsaveís.
 

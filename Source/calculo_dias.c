@@ -1,4 +1,10 @@
 ///\file
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
 ///\brief Função num_dias() - para calcular o numero de dias entre duas datas
 ///\details Função num_dias() permite calcular os numeros de dias entre duas datas e devolve o numero de dias.
 ///\details tem como parametros de entrada a data inicial e a data final e devolve o numero de dias

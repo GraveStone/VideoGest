@@ -1,4 +1,10 @@
 ///\file
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
 ///\brief Função menu_princ() - Menu principal do programa.
 ///\details A função menu_princ() permite-nos ir para os menus dos Sócios, Filmes, Alugueres e Sair do programa.
 void menu_princ(void)

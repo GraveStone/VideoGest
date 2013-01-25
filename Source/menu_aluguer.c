@@ -1,4 +1,10 @@
 ///\file
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
 ///\brief função menu_aluguer() - menu para o aluguer
 ///\details Função que mostra um menu para fazer cada uma das operações: alugar, devolver, .
 

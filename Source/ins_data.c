@@ -1,4 +1,10 @@
 ///\file
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
 ///\brief Função ins_data() - Insere a data no formato AAAA-MM-DD.
 ///\details Esta função tem como objectivo de inserir a data quando é solicitada retornando a data por meio de Apontadores.
 ///\param *year Apontador usado para devolver o ano.
