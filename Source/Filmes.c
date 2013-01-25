@@ -97,7 +97,7 @@ int ver_filmes(void)
     fclose(fp_ver_fil);
     return;
    }
-  printf("\nN.filme\tTitulo\tDuracao\tGenero\tEstado");
+  printf("\n\tN.filme  ||  Titulo  ||  Duracao ||  Genero\n\n");
   do
    {
     teste=fread(&aux_fil,sizeof(filme),1,fp_ver_fil);
@@ -105,7 +105,7 @@ int ver_filmes(void)
      {
      if(aux_fil.estado==1)
      {
-         printf("\n%d\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
+         printf("\n\t%d  ||  %s  ||  %d  ||  %s",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero);
      }
      }
    }
@@ -149,22 +149,24 @@ int modificar_filme()
                                                 printf("\nN.filme\tTitulo\tDuracao\tGenero\tEstado");
                                                 printf("\n%d\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
                                                 printf("\nApenas pode ser modificado o Titulo, Duracao e Genero");
-                                                getch(); printf("Prima ENTER para continuar");
-                                                system("cls");
+                                                //getch(); printf("Prima ENTER para continuar");
+
                                                 do
                                                 {
                                                 printf("\nPretende alterar:\n[A] Titulo\n[B] Duracao\n[C] Genero \n[D] Todos\n [S]SAIR ");
                                                 op=toupper(getch());
                                                 switch(op)
                                                 {
-                                                    printf("\nPretende alterar:\n[A] Titulo\n[B] Duracao\n[C] Genero \n[D] Todos\n [S]SAIR ");
-                                                               case 'A':
+                                                              case 'A':
                                                                    {
-                                                                        system("cls");
+
                                                                         printf("\n\nInsira o nome do filme:\n");
                                                                         rewind(stdin);
                                                                         gets(aux_fil.nome);
-                                                                        break;
+                                                                        fsetpos(fp_fil,&filepos);
+                                                                        fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                                                                        fclose(fp_fil);
+                                                                        return;
                                                                    }
 
 
@@ -173,21 +175,22 @@ int modificar_filme()
 
                                                                         printf("\nInserir a duracao do filme:");
                                                                         scanf("%ld",&aux_fil.duracao);
-                                                                        getch();
-                                                                        break;
+                                                                        fsetpos(fp_fil,&filepos);
+                                                                        fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                                                                        fclose(fp_fil);
+                                                                        return;
                                                                     }
 
                                                                case 'C':
-                                                                   {
+                                                                    {
 
-
-
-                                                                        system("cls");
                                                                         printf("\n\nInsira o genero:");
                                                                         rewind(stdin);
                                                                         gets(aux_fil.genero);
-                                                                        getch();
-                                                                        break;
+                                                                        fsetpos(fp_fil,&filepos);
+                                                                        fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                                                                        fclose(fp_fil);
+                                                                        return;
                                                                     }
 
                                                                 case 'D':
@@ -200,31 +203,20 @@ int modificar_filme()
                                                                         printf("\n\nInsira o genero:");
                                                                         rewind(stdin);
                                                                         gets(aux_fil.genero);
-                                                                        getch();
-                                                                        break;
+                                                                        fsetpos(fp_fil,&filepos);
+                                                                        fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                                                                        fclose(fp_fil);
+                                                                        return;
                                                                         }
 
                                                                case 'S':
                                                                    {
-                                                                    fsetpos(fp_fil,&filepos);
-                                                                    fwrite(&aux_fil,sizeof(filme),1,fp_fil);
                                                                     fclose(fp_fil);
                                                                     return;
                                                                    }
-
                }
 
-     printf("ERRO!! NUMERO DE FILME NAO ENCONTRADO!");
-     getch();
-
-     //return(0);
-
-             /* aux_fil.estado=0;
-              fsetpos(fp_fil,&filepos);
-              fwrite(&aux_fil,sizeof(filme),1,fp_fil);
-              fclose(fp_fil);
-              return;*/
-        }
+       }
         while(op!='S');
    }
 

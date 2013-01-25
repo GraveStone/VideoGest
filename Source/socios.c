@@ -29,7 +29,7 @@ int ver_lista()
         return;
     }
     system("cls");
-    printf("numero de socio \tnome: \t morada \t data de nascimento: \t contacto: \t estado:");
+    printf("\n\tN.de Soc. ||  Nome  ||  Morada  ||  Data de Nasci.  || Contacto\n\n");
     do
     {
      teste=fread(&aux_soc,sizeof(SOCIO),1,fp_ver);
@@ -37,7 +37,7 @@ int ver_lista()
     {
     if(aux_soc.estado==1)
     {
-        printf("\n%d\t%s\t%s\t%ld\t%ld\t%d",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto,aux_soc.estado);
+        printf("\n\t%d || %s || %s || %ld || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
     }
     }
     }
@@ -84,7 +84,7 @@ int ver_lista()
 /// \param numero de socio
 /// \param data de nascimento
 /// \param contacto
-int adicionar_soc(SOCIO *soc)
+int adicionar_soc()
 {
    FILE *fp_soc;
     char op;
