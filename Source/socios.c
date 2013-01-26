@@ -173,9 +173,22 @@ int modificar_soc ()
         getch();
         return;
     }
-    system("cls");
-    printf("Qual o numero de socio que quer alterar?");
-    scanf("%d",&alterar);
+    rewind(fp_soc);
+    do
+    {
+     system("CLS");
+     printf("Insira o numero do socio que quer alterar: ");
+     scanf("%d",&alterar);
+     rewind(fp_soc);
+     fseek(fp_soc,0L,SEEK_END);
+     teste=fread(&aux_soc,sizeof(SOCIO),1,fp_soc);
+     if(alterar>aux_soc.num_soc)
+      {
+          printf("numero de socio:%d nao existe so existe ate ao numero %d de socio",alterar,aux_soc.num_soc);
+          getch();
+      }
+    }
+    while(alterar>aux_soc.num_soc);
     rewind(fp_soc);
     do
     {
@@ -185,7 +198,37 @@ int modificar_soc ()
     {
         if(aux_soc.num_soc==alterar)
          {
+             if(aux_soc.estado==0)
+             {
+                printf("\n\t%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
+                printf("\nSocio eliminado pertende recuperar? S/N");
+                do
+                {
+                    op=toupper(getch());
+                    switch(op)
+                    {
+                           case 'S':
+                                {
+                                   aux_soc.estado=1;
+                                    fsetpos(fp_soc,&filepos);
+                                    fwrite(&aux_soc,sizeof(SOCIO),1,fp_soc);
+                                    fclose(fp_soc);
+                                    return;
+                                }
 
+                          case 'N':
+                                    {
+                                    fclose(fp_soc);
+                                    return;
+                                    }
+
+
+                    }
+                }
+                while(op!='N' && op!='S');
+             }
+             if(aux_soc.estado!=0)
+             {
                                                printf("\n\t%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
                                                printf("Apenas pode ser modificado a morada e o o contacto");
                                                getch();
@@ -238,16 +281,15 @@ int modificar_soc ()
                                                                     fclose(fp_soc);
                                                                     return;
                                                                    }
-               }
-
-       }
-        while(op!='S');
-   }
-
+                                                }
+                                            }
+                                        while(op!='S');
+                    }
+}
 }
 }
  while(!feof(fp_soc));
-    fclose(fp_soc);
+ fclose(fp_soc);
 }
 
 ///\brief Função remover_soc() - função para apagar sócio.
@@ -267,9 +309,32 @@ int remover_soc()
         getch();
         return;
     }
-
-    printf("Insira o numero do socio a eliminar: ");
-    scanf("%d",&n_soc);
+    rewind(fp_soc);
+    do
+    {
+     system("CLS");
+     printf("Insira o numero do socio a eliminar: ");
+     scanf("%d",&n_soc);
+     rewind(fp_soc);
+     fseek(fp_soc,0L,SEEK_END);
+     teste=fread(&aux_soc,sizeof(SOCIO),1,fp_soc);
+     if(n_soc>aux_soc.num_soc)
+      {
+          printf("numero de socio:%d nao existe so existe ate ao numero %d de socio",n_soc,aux_soc.num_soc);
+          getch();
+      }
+      else
+      {
+          if(aux_soc.estado==0)
+          {
+              printf("\n Socio ja tinha sido eliminado!!!");
+              getch();
+              fclose(fp_soc);
+              return;
+          }
+      }
+    }
+    while(n_soc>aux_soc.num_soc);
     rewind(fp_soc);
     do
     {
