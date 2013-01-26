@@ -1,3 +1,12 @@
+///\file
+///\brief VideoGest - Gestão de videoclube ficheiro principal para execução do programa.
+///\details VideoGest - programa de gestão de videoclube para gerir os socios, filmes e alugueres.
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
@@ -13,18 +22,9 @@
 #include"filmes.c"
 #include"calculo_dias.c"
 #include"ins_data.c"
-///\file
-///\brief VideoGest - Gestão de videoclube ficheiro principal para execução do programa
-///\details VideoGest - programa de gestão de videoclube para gerir os socios, filmes e alugueres
-///\authors Nelson Fernandes N.º 15390
-///\authors Rita Serra       N.º 47086
-///\authors Marta Santos     N.º 47181
-///\date Jan. 2013
-///\version 1.0
-///\copyright NRM
-///
-///\brief main() função principal para execução do programa
-///\details main() nesta função é iniciado o programa com a chamada das funções creditos() e menu_princ()
+
+///\brief Função principal para execução do programa.
+///\details Nesta função é iniciado o programa com a chamada das funções creditos() e menu_princ().
 int main()
 {
     creditos();

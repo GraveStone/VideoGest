@@ -1,14 +1,16 @@
-
 ///\file
+///\brief Função menu_socios() - menu para os Sócios.
+///\details Função que mostra um menu para fazer cada uma das operações mostradas no ecran.
 ///\authors Nelson Fernandes N.º 15390
 ///\authors Rita Serra       N.º 47086
 ///\authors Marta Santos     N.º 47181
 ///\date Jan. 2013
 ///\version 1.0
 ///\copyright NRM
-///\brief função menu_socios() - menu para os Sócios
-///\details Função que mostra um menu para fazer cada uma das operações: alugar, devolver, remover .
 
+
+///\brief Função que mostra o  Menu para os Sócios
+///\details Esta função mostra um menu para fazer cada uma das operações listadas no ecran.
 int menu_socios()
 {
     char op;
@@ -16,7 +18,7 @@ int menu_socios()
     do
     {
         system("CLS");
-         printf("\n\n\t\t\t     NRM");
+        printf("\n\n\t\t\t     NRM");
         printf("\n\n\t\t\t  Video Gest");
         printf("\n\n\t\t\t Menu Socios");
         printf("\n\n\t\tA - Ver lista de socios");

@@ -1,15 +1,19 @@
 ///\file
+///\brief Função ins_data() - Insere a data no formato AAAA-MM-DD.
+///\details Função implementada para inserção da data no formato AAAA-MM-DD.
 ///\authors Nelson Fernandes N.º 15390
 ///\authors Rita Serra       N.º 47086
 ///\authors Marta Santos     N.º 47181
 ///\date Jan. 2013
 ///\version 1.0
 ///\copyright NRM
-///\brief Função ins_data() - Insere a data no formato AAAA-MM-DD.
+
+
+///\brief Função para criar uma data
 ///\details Esta função tem como objectivo de inserir a data quando é solicitada retornando a data por meio de Apontadores.
-///\param *year Apontador usado para devolver o ano.
-///\param *month Apontador usado para devolver o mês.
-///\param *day Apontador usado para devolver o dia.
+///\param *year Apontador do tipo long int usado para devolver o ano.
+///\param *month Apontador do tipo int usado para devolver o mês.
+///\param *day Apontador do tipo int usado para devolver o dia.
 ///\return Retorna a data por meio de Apontadores.
 int ins_data (long int *year, int *month, int *day)
 {
@@ -46,7 +50,6 @@ int ins_data (long int *year, int *month, int *day)
             while(da<=0||da>28);
             bissexto=0;
         }
-
     }
     else
     {

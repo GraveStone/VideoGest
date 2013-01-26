@@ -1,24 +1,41 @@
+///\file
+///\brief Ficheiro que contém todas funções relacionadas com os Sócios
+///\details VideoGest - programa de gestão de videoclube para gerir os socios, filmes e alugueres.
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
+
+/// Define uma constante que és usada para o tamanho do vector nome
 #define Mnome 50
+/// Define uma constante que és usada para o tamanhodo vector morada
 #define Mmorada 50
 /// Cria uma estrutura com os dados dos sócios
 typedef struct
 {
+    /// Guarda o nome do sócio
  char nome[Mnome];
+ /// Guarda a morada
  char morada[Mmorada];
+ /// Numero de Socio
  int num_soc;
+ /// Data de nascimento
  DATA dt_nasc;
+ /// Contacto do Sócio
  long int contacto;
+ /// Guarda o estado do Sócio 0 - Sócio eleminado, 1 - Sócio Activo.
  int estado;
 }SOCIO;
-
+/// Variavel gobal do tipo SOCIO usada para armazenar os dados relativos ao Sócio.
 SOCIO aux_soc;
-/// funcao para mostrar a lista de socios
-/// param ficheiro Socios, estutura Socios
+
+/// Função para mostrar a lista de socios
 int ver_lista()
 {
      FILE *fp_ver;
      int teste;
-
 
      fp_ver=fopen("socios.txt","rb");
      if(!fp_ver)
@@ -44,7 +61,7 @@ int ver_lista()
     getch();
  }
 
-///funcao para ver que socio existem
+///Função para ver que socio existem
 ///param
  int socio_existe(long int n_soc)
 {

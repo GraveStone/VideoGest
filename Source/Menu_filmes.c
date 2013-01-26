@@ -1,13 +1,16 @@
 ///\file
+///\brief Função menu_filmes() - menu para os filmes.
+///\details Função que mostra um menu para fazer cada uma das operações: ver, adicionar, remover, modificar.
 ///\authors Nelson Fernandes N.º 15390
 ///\authors Rita Serra       N.º 47086
 ///\authors Marta Santos     N.º 47181
 ///\date Jan. 2013
 ///\version 1.0
 ///\copyright NRM
-///\brief função menu_filmes() - menu para os filmes
-///\details Função que mostra um menu para fazer cada uma das operações: ver, adicionar, remover.
 
+
+///\brief Função que mostra o Menu dos filmes com as operações disponiveis para os filmes.
+///\details Nesta Função mostra no ecran as opçãos para listar os filmes no ecran, adicionar filmes , remover filme, modificar, e permite voltar ao ecran anterior.
 int menu_filmes()
 {
     char op;

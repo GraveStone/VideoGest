@@ -1,20 +1,28 @@
+/// Cria uma estrutura para guardar uma Data.
 typedef struct
 {
+    /// O Ano da Data.
     long int ano;
-    int mes, dia;
+    ///O Mês da Data.
+    int mes;
+    ///O Dia da Data.
+    int dia;
 }
 DATA;
 
-
 ///\file
+///\brief Função menu_princ() - Menu principal do programa.
+///\details A função menu_princ() permite-nos ir para os menus dos Sócios, Filmes, Alugueres e Sair do programa.
 ///\authors Nelson Fernandes N.º 15390
 ///\authors Rita Serra       N.º 47086
 ///\authors Marta Santos     N.º 47181
 ///\date Jan. 2013
 ///\version 1.0
 ///\copyright NRM
-///\brief Função menu_princ() - Menu principal do programa.
-///\details A função menu_princ() permite-nos ir para os menus dos Sócios, Filmes, Alugueres e Sair do programa.
+
+
+///\brief Função que mostra o Menu principal do programa.
+///\details Esta função lista no ecran as opções disponiveis epermite-nos ir para os menus dos Sócios, Filmes, Alugueres e Sair do programa.
 void menu_princ(void)
 {
     char op;
