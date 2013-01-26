@@ -230,13 +230,11 @@ int modificar_soc ()
              if(aux_soc.estado!=0)
              {
                                                printf("\n\t%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
-                                               printf("Apenas pode ser modificado a morada e o o contacto");
-                                               getch();
-                                               printf("Prima ENTER para continuar");
-                                               system("cls");
+                                               printf("\nApenas pode ser modificado a morada e o o contacto.");
+
                                                 do
                                                 {
-                                                printf("Pretende alterar:\n [A] Morada\n [B] Contacto\n [C] Ambos\n [S] SAIR ");
+                                                printf(" Pretende alterar:\n [A] Morada\n [B] Contacto\n [C] Ambos\n [S] SAIR ");
                                                 op=toupper(getch());
                                                 switch(op)
                                                 {

@@ -62,7 +62,7 @@ int inserir_filme()
     system("CLS");
     printf("\nFicha de Aluger:");
     printf("\n\nNumero do Filme:%d",aux_fil.num_filme);
-    printf("\n\nInsira o nome do filme:\n");
+    printf("\n\nInsira o nome do filme(mim):\n");
     rewind(stdin);
     gets(aux_fil.nome);
     printf("\nInserir a duracao do filme:");
