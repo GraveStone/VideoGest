@@ -1,23 +1,40 @@
+///\file
+///\brief Ficheiro que contem todas funções relativas ao dados do filme
+///\details Neste ficheiro contem funções para inserir apagar e modificar dados de Filmes
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
 
+
+/// Define uma constante que és usada para o tamanho do vector nome
 #define Mnome 50
+/// Define uma constante que és usada para o tamanho do vector genero
 #define Mgenero 20
+
+/// Cria uma estrutura para guardar o dados relativos aos filmes.
 typedef struct
 {
-        /// ID do filme na base de dados
+/// Guarda ID do filme
         int num_filme;
-        /// ID do filme na base de dados
+/// Guarda o Titulo do Filme
         char nome[Mnome];
+/// Guarda o tempo de duração do filme
         int duracao;
+/// Guarda a categoria do filme
         char genero[Mgenero];
+/// Guarda em que estado se encontra o filme
         int estado;
-
 }filme;
 
+/// Variavel global para guarda os dados do filmes
 filme aux_fil;
 
 
-/// Função para inserir um novo filme.
-
+///\brief Função inserir_filme() - função para inserir dados dos filmes.
+///\details Nesta função são solicitados diversos campos para preencher dados relativos ao filme.
 int inserir_filme()
 {
     FILE *fp_fil;
@@ -71,10 +88,9 @@ int inserir_filme()
     fclose(fp_fil);
 }
 
-/// Função para ver filmes
-
-
-int ver_filmes(void)
+///\brief Função ver_filmes() - função para ver lista dos filmes.
+///\details Nesta função apresenta no ecran a lista de filmes activos
+int ver_filmes()
  {
   FILE *fp_ver_fil;
   int teste,n_reg;
@@ -114,9 +130,8 @@ int ver_filmes(void)
   fclose(fp_ver_fil);
 }
 
-
-/// Função para modificar filme.
-
+///\brief Função modificar_filme() - função para modificar dados dos filmes.
+///\details Nesta função pode ser alterados alguns dados relativos aos filmes.
 int modificar_filme()
 {
 
@@ -227,9 +242,8 @@ int modificar_filme()
 }
 
 
-
-///Apagar filme
-
+///\brief Função apagar_filmes() - função para apagar filmes.
+///\details Nesta função altera o estado do filme para 0 indicando que foi removido e que deixou de estar disponivel
 int apagar_filme()
 {
     FILE *fp_fil;
@@ -269,9 +283,11 @@ int apagar_filme()
     fclose(fp_fil);
 }
 
-
-
-int filme_existe(long int n_filme)
+///\brief Função filme_existe() - função para ver se o filme existe.
+///\details Nesta função vai procurar no ficheiro o numero de um filme para ver se ele existe ou não
+///\param n_filme do tipo int recebe o numero do filme que se pretende procurar.
+///\return devolve um valor para indicar se o filme existe ou nao.
+int filme_existe(int n_filme)
 {
   FILE *fp_fil;
   int teste;

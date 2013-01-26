@@ -1,14 +1,38 @@
+///\file
+///\brief Ficheiro que contem todas funções relativas ao aluguer do filme
+///\details
+///\authors Nelson Fernandes N.º 15390
+///\authors Rita Serra       N.º 47086
+///\authors Marta Santos     N.º 47181
+///\date Jan. 2013
+///\version 1.0
+///\copyright NRM
+
+
+/// Cria uma estrutura para guardar o datos relativos aos alugueres.
 typedef struct
 {
-    int num_filme, num_socio;
-    DATA data_lev, data_ent;
+/// Guarda o ID do Filme
+    int num_filme;
+/// Guarda o ID do Sócio
+    int num_socio;
+/// Guarda a data de levantamento do filme
+    DATA data_lev;
+/// Guarda a data de devolução do filme
+    DATA data_ent;
+/// Guarda o estado do aluguer 1 - alugado, 0 - devolvido
     int estado;
+/// Guarda o numero de dias que o filme foi alugado
     long int dias;
 }
 ALUGAR;
 
+/// Variavel golbal para guardar os dados relativos ao aluguer
 ALUGAR aux_al;
 
+
+///\brief Função aluguer() - função para alugar um filme.
+///\details Nesta função de aluguer é solicitado o numero do socio e do filme e a data de levantamento e coloca o estado a 1 para indicar aluguer activo.
 int aluguer()
 {
     FILE *fp_al;
@@ -35,7 +59,7 @@ int aluguer()
        a=socio_existe(n_socio);
        if(a==0)
        {
-        printf("\n\nNumero n�o valido insira novo numero de Socio:");
+        printf("\n\nNumero não valido insira novo numero de Socio:");
         scanf("%d",&n_socio);
        }
        else
@@ -51,7 +75,7 @@ int aluguer()
        b=filme_existe(n_filme);
        if(b==0)
        {
-        printf("\n\nNumero n�o valido insira novo numero de Filme:");
+        printf("\n\nNumero não valido insira novo numero de Filme:");
         scanf("%d",&n_filme);
        }
        else
@@ -80,6 +104,8 @@ int aluguer()
     fclose(fp_al);
 }
 
+///\brief Função devolucao() - função para devolver um filme.
+///\details Nesta função de devolição é solicitado o numero do socio e do filme e a data de devolução e coloca o estado a 0 para indicar que terminou o aluguer e calcula o numero de dias que o filme teve alugado .
 int devolucao()
 {
     FILE *fp_ver;
@@ -128,7 +154,7 @@ int devolucao()
 
     printf("Qual o Numero de Socio para devolucao:");
     scanf("%d",&dev);
-    printf("\nN� filme\tSocio");
+    printf("\nN§ filme\tSocio");
     do
     {
         teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
@@ -144,7 +170,7 @@ int devolucao()
     rewind(fp_ver);
     printf("Qual o Numero de filme para devolucao:");
     scanf("%d",&dev);
-    printf("\nN� filme\tSocio");
+    printf("\nN§ filme\tSocio");
     do
     {
         fgetpos(fp_ver,&filepos);
@@ -155,7 +181,7 @@ int devolucao()
             {
                 do
                 {
-                printf("\nData:\n\nInsira a DATA devolu��o formato aaaa-mm-dd:\n\nANO:");
+                printf("\nData:\n\nInsira a DATA devolução formato aaaa-mm-dd:\n\nANO:");
                 ins_data(&aux_al.data_ent.ano,&aux_al.data_ent.mes,&aux_al.data_ent.dia);
                 aux_al.dias=num_dias(aux_al.data_lev.ano,aux_al.data_ent.ano,aux_al.data_lev.mes,aux_al.data_ent.mes,aux_al.data_lev.dia,aux_al.data_ent.dia);
                 if(aux_al.dias<0)
@@ -180,7 +206,9 @@ int devolucao()
     fclose(fp_ver);
 }
 
-int ver_alugados(void)
+///\brief Função ver_alugados - função para ver os alugueres activos.
+///\details Nesta função mostra o filmes que ainda se encontram alugados
+int ver_alugados()
  {
   FILE *fp_ver;
   int teste,n_reg;
@@ -203,7 +231,7 @@ int ver_alugados(void)
     fclose(fp_ver);
     return;
    }
-  printf("\nN� filme\tSocio");
+  printf("\nN§ filme\tSocio");
   do
    {
     teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);

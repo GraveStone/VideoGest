@@ -15,23 +15,24 @@
 /// Cria uma estrutura com os dados dos sócios
 typedef struct
 {
-    /// Guarda o nome do sócio
+/// Guarda o nome do sócio
  char nome[Mnome];
- /// Guarda a morada
+/// Guarda a morada
  char morada[Mmorada];
- /// Guarda numero de Socio
+/// Guarda numero de Socio
  int num_soc;
- /// Guarda a Data de nascimento do Sócio
+/// Guarda a Data de nascimento do Sócio
  DATA dt_nasc;
- /// Guarda o Contacto do Sócio
+/// Guarda o Contacto do Sócio
  long int contacto;
- /// Guarda o estado do Sócio 0 - Sócio eleminado, 1 - Sócio Activo.
+/// Guarda o estado do Sócio 0 - Sócio eleminado, 1 - Sócio Activo.
  int estado;
 }SOCIO;
 /// Variavel gobal do tipo SOCIO usada para armazenar os dados relativos ao Sócio.
 SOCIO aux_soc;
 
-/// Função para mostrar a lista de socios
+///\brief Função ver_lista() - função para ver lista de Sócios.
+///\details Nesta função apresenta no ecran a lista de Sócios activos
 int ver_lista()
 {
      FILE *fp_ver;
@@ -61,9 +62,11 @@ int ver_lista()
     getch();
  }
 
-///Função para ver que socio existem
-///param
- int socio_existe(long int n_soc)
+///\brief Função socio_existe() - função para ver se o sócio existe.
+///\details Nesta função vai procurar no ficheiro o numero de um socio para ver se ele existe ou não
+///\param n_soc do tipo int recebe o numero do filme que se pretende procurar.
+///\return devolve um valor para indicar se o filme existe ou nao.
+int socio_existe(int n_soc)
 {
   FILE *fp_soc;
   int teste;
@@ -94,12 +97,8 @@ int ver_lista()
     return 0;
 }
 
-/// funcao para adicionar socio
-/// \param nome do socio
-/// \param morada
-/// \param numero de socio
-/// \param data de nascimento
-/// \param contacto
+///\brief Função adicionar_soc() - função para inserir dados dos sócios.
+///\details Nesta função são solicitados diversos campos para preencher dados relativos ao sócio.
 int adicionar_soc()
 {
    FILE *fp_soc;
@@ -156,12 +155,8 @@ int adicionar_soc()
 }
 
 
-/// funcao para modificar a ficha de socio
-/// \param nome do socio
-/// \param morada
-/// \param numero de socio
-/// \param data de nascimento
-/// \param contacto
+///\brief Função modificar_soc() - função para modificar dados dos sócio.
+///\details Nesta função pode ser alterados alguns dados relativos aos sócios.
 int modificar_soc ()
 {
 
@@ -255,9 +250,8 @@ int modificar_soc ()
     fclose(fp_soc);
 }
 
-
-
-/// funcao para remover socio
+///\brief Função remover_soc() - função para apagar sócio.
+///\details Nesta função altera o estado do sócio para 0 indicando que foi removido e que deixou de estar disponivel
 int remover_soc()
 {
     FILE *fp_soc;

@@ -1,11 +1,11 @@
 /// Cria uma estrutura para guardar uma Data.
 typedef struct
 {
-    /// O Ano da Data.
+/// O Ano da Data.
     long int ano;
-    ///O Mês da Data.
+/// O Mês da Data.
     int mes;
-    ///O Dia da Data.
+/// O Dia da Data.
     int dia;
 }
 DATA;
