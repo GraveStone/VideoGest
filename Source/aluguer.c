@@ -9,7 +9,7 @@
 ///\copyright NRM
 
 
-/// Cria uma estrutura para guardar o datos relativos aos alugueres.
+/// Cria uma estrutura para guardar o dados relativos aos alugueres.
 typedef struct
 {
 /// Guarda o ID do Filme
@@ -35,10 +35,11 @@ ALUGAR aux_al;
 ///\details Nesta função de aluguer é solicitado o numero do socio e do filme e a data de levantamento e coloca o estado a 1 para indicar aluguer activo.
 int aluguer()
 {
-    FILE *fp_al;
+    FILE *fp_al, *fp_fil;
     char op;
     int bissexto, teste, a, b;
     int n_filme, n_socio;
+    fpos_t filepos;
 
     system("CLS");
     fp_al=fopen("alugados.txt","a+b");
@@ -50,23 +51,45 @@ int aluguer()
     }
     do
     {
+    do
+    {
     system("CLS");
     printf("\nFicha de Aluger:");
     printf("\n\nInsira o numero de Socio:");
     scanf("%d",&n_socio);
+    if(n_socio<=0)
+    {
+        printf("\nNumero nao valido!!!");
+        getch();
+        rewind(stdin);
+    }
+    }
+    while(n_socio<=0);
     do
     {
        a=socio_existe(n_socio);
-       if(a==0)
-       {
-        printf("\n\nNumero não valido insira novo numero de Socio:");
-        scanf("%d",&n_socio);
-       }
-       else
+       if(a==1)
        {
         aux_al.num_socio=n_socio;
        }
-    }
+       else
+       {
+        do
+        {
+        system("CLS");
+        printf("\n\nNumero nao valido insira novo numero de Socio:");
+        scanf("%d",&n_socio);
+        if(n_socio<=0)
+           {
+            printf("\nNumero nao valido!!!");
+            getch();
+            rewind(stdin);
+            }
+        }
+        while(n_socio<=0);
+       }
+       }
+
     while(aux_al.num_socio!=n_socio);
     printf("\n\nInsira o numero de Filme:");
     scanf("%d",&n_filme);
@@ -75,8 +98,12 @@ int aluguer()
        b=filme_existe(n_filme);
        if(b==0)
        {
-        printf("\n\nNumero não valido insira novo numero de Filme:");
+
+        printf("\nNumero nao valido insira novo numero de Filme:");
         scanf("%d",&n_filme);
+
+
+
        }
        else
        {
@@ -84,11 +111,46 @@ int aluguer()
        }
     }
     while(aux_al.num_filme!=n_filme);
-    printf("\nData:\n\nInsira a DATA de Aluguer formato aaaa-mm-dd:\n\nANO:");
+    printf("\nData:\n\nInsira a Data de Aluguer formato aaaa-mm-dd:\n\nANO:");
     ins_data(&aux_al.data_lev.ano,&aux_al.data_lev.mes,&aux_al.data_lev.dia);
     aux_al.estado=1;
     fwrite(&aux_al,sizeof(ALUGAR),1,fp_al);
     rewind(stdin);
+
+    fp_fil=fopen("filmes.txt","r+b");
+    if(!fp_fil)
+    {
+        printf("\n\t Erro a ler o Ficheiro!!");
+        getch();
+        return;
+    }
+     do
+   {
+        fgetpos(fp_fil,&filepos);
+        teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+        if(teste==1)
+        {
+            if(aux_fil.num_filme==n_filme)
+            {
+                if(aux_fil.estado==1)
+               {
+                aux_fil.estado=2;
+                fsetpos(fp_fil,&filepos);
+                fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+               }
+               else
+               {
+                    printf("\nErro!!!");
+                    getch();
+                    return;
+              }
+            }
+        }
+    }
+    while(!feof(fp_fil));
+    getch();
+    fclose(fp_fil);
+
     do
     {
     printf("\nQuer Alugar outro filme?\n\n S-SIM\n N-NAO");

@@ -10,6 +10,29 @@ typedef struct
 }
 DATA;
 
+/// Define uma constante que és usada para o tamanho do vector nome
+#define Mnome 50
+/// Define uma constante que és usada para o tamanho do vector genero
+#define Mgenero 20
+
+/// Cria uma estrutura para guardar o dados relativos aos filmes.
+typedef struct
+{
+/// Guarda ID do filme
+        int num_filme;
+/// Guarda o Titulo do Filme
+        char nome[Mnome];
+/// Guarda o tempo de duração do filme
+        int duracao;
+/// Guarda a categoria do filme
+        char genero[Mgenero];
+/// Guarda em que estado se encontra o filme
+        int estado;
+}filme;
+
+/// Variavel global para guarda os dados do filmes
+filme aux_fil;
+
 ///\file
 ///\brief Função menu_princ() - Menu principal do programa.
 ///\details A função menu_princ() permite-nos ir para os menus dos Sócios, Filmes, Alugueres e Sair do programa.

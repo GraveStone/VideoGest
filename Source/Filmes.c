@@ -9,30 +9,6 @@
 ///\copyright NRM
 
 
-/// Define uma constante que és usada para o tamanho do vector nome
-#define Mnome 50
-/// Define uma constante que és usada para o tamanho do vector genero
-#define Mgenero 20
-
-/// Cria uma estrutura para guardar o dados relativos aos filmes.
-typedef struct
-{
-/// Guarda ID do filme
-        int num_filme;
-/// Guarda o Titulo do Filme
-        char nome[Mnome];
-/// Guarda o tempo de duração do filme
-        int duracao;
-/// Guarda a categoria do filme
-        char genero[Mgenero];
-/// Guarda em que estado se encontra o filme
-        int estado;
-}filme;
-
-/// Variavel global para guarda os dados do filmes
-filme aux_fil;
-
-
 ///\brief Função inserir_filme() - função para inserir dados dos filmes.
 ///\details Nesta função são solicitados diversos campos para preencher dados relativos ao filme.
 int inserir_filme()
@@ -119,7 +95,7 @@ int ver_filmes()
     teste=fread(&aux_fil,sizeof(filme),1,fp_ver_fil);
     if(teste==1)
      {
-     if(aux_fil.estado==1)
+     if(aux_fil.estado!=0)
      {
          printf("\n\t%d  ||  %s  ||  %d  ||  %s",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero);
      }
@@ -377,8 +353,17 @@ int filme_existe(int n_filme)
         {
             if(aux_fil.num_filme==n_filme)
             {
-               fclose(fp_fil);
-               return 1;
+                if(aux_fil.estado==1)
+               {
+                fclose(fp_fil);
+                return 1;
+               }
+               else
+               {
+                    printf("\nFilme nao se encontra disponivel!!!");
+                    getch();
+                    return 0;
+              }
             }
         }
     }

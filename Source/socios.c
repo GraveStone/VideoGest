@@ -86,13 +86,22 @@ int socio_existe(int n_soc)
         {
             if(aux_soc.num_soc==n_soc)
             {
-               fclose(fp_soc);
-               return 1;
+               if(aux_soc.estado==1)
+               {
+                fclose(fp_soc);
+                return 1;
+               }
+               else
+               {
+                    printf("\nSocio eliminado!!!");
+                    getch();
+                    return 0;
+              }
+
             }
         }
     }
     while(!feof(fp_soc));
-    getch();
     fclose(fp_soc);
     return 0;
 }
