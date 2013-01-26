@@ -201,7 +201,7 @@ int modificar_soc ()
              if(aux_soc.estado==0)
              {
                 printf("\n\t%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
-                printf("\nSocio eliminado pertende recuperar? S/N");
+                printf("\nSocio eliminado pretende recuperar? S/N");
                 do
                 {
                     op=toupper(getch());

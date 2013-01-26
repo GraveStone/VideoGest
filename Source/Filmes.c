@@ -148,9 +148,22 @@ int modificar_filme()
         getch();
         return;
     }
-    system("cls");
-    printf("Qual o numero de filme que quer alterar?");
-    scanf("%d",&alterar);
+    rewind(fp_fil);
+     do
+    {
+     system("CLS");
+     printf("Insira o numero do filme que quer alterar: ");
+     scanf("%d",&alterar);
+     rewind(fp_fil);
+     fseek(fp_fil,0L,SEEK_END);
+     teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+     if(alterar>aux_fil.num_filme)
+      {
+          printf("numero de filme:%d nao existe so existe ate ao filme numero %d",alterar,aux_fil.num_filme);
+          getch();
+      }
+    }
+    while(alterar>aux_fil.num_filme);
     rewind(fp_fil);
     do
     {
@@ -160,6 +173,39 @@ int modificar_filme()
     {
         if(aux_fil.num_filme==alterar)
          {
+            if(aux_fil.estado==0)
+             {
+                printf("\nN.filme\tTitulo\tDuracao\tGenero\tEstado");
+                printf("\n%d\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
+                printf("\nFilme eliminado pretende recuperar? S/N");
+                do
+                {
+                    op=toupper(getch());
+                    switch(op)
+                    {
+                           case 'S':
+                                {
+                                    aux_fil.estado=1;
+                                    fsetpos(fp_fil,&filepos);
+                                    fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                                    fclose(fp_fil);
+                                    return;
+                                }
+
+                          case 'N':
+                                    {
+                                    fclose(fp_fil);
+                                    return;
+                                    }
+
+
+                    }
+                }
+                while(op!='N' && op!='S');
+             }
+            if(aux_fil.estado!=0)
+                {
+
 
                                                 printf("\nN.filme\tTitulo\tDuracao\tGenero\tEstado");
                                                 printf("\n%d\t%s\t%d\t%s\t%d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero, aux_fil.estado);
@@ -233,6 +279,7 @@ int modificar_filme()
 
        }
         while(op!='S');
+         }
    }
 
 }
@@ -259,9 +306,32 @@ int apagar_filme()
         getch();
         return;
     }
-
-    printf("Insira o numero do filme a eliminar: ");
-    scanf("%d",&n_fil);
+    rewind(fp_fil);
+    do
+    {
+     system("CLS");
+     printf("Insira o numero do filme a eliminar: ");
+     scanf("%d",&n_fil);
+     rewind(fp_fil);
+     fseek(fp_fil,0L,SEEK_END);
+     teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+     if(n_fil>aux_fil.num_filme)
+      {
+          printf("numero de filme:%d nao existe so existe ate ao filme numero %d",n_fil,aux_fil.num_filme);
+          getch();
+      }
+      else
+      {
+          if(aux_fil.estado==0)
+          {
+              printf("\n Filme ja tinha sido eliminado!!!");
+              getch();
+              fclose(fp_fil);
+              return;
+          }
+      }
+    }
+    while(n_fil>aux_fil.num_filme);
     rewind(fp_fil);
     do
     {
