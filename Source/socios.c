@@ -1,6 +1,6 @@
 ///\file
 ///\brief Ficheiro que contém todas funções relacionadas com os Sócios
-///\details VideoGest - programa de gestão de videoclube para gerir os socios, filmes e alugueres.
+///\details Neste ficheiro foram desenvolvidas as funções para inserir, listar, modicar, verificar a existencia de Sócios.
 ///\authors Nelson Fernandes N.º 15390
 ///\authors Rita Serra       N.º 47086
 ///\authors Marta Santos     N.º 47181
@@ -19,11 +19,11 @@ typedef struct
  char nome[Mnome];
  /// Guarda a morada
  char morada[Mmorada];
- /// Numero de Socio
+ /// Guarda numero de Socio
  int num_soc;
- /// Data de nascimento
+ /// Guarda a Data de nascimento do Sócio
  DATA dt_nasc;
- /// Contacto do Sócio
+ /// Guarda o Contacto do Sócio
  long int contacto;
  /// Guarda o estado do Sócio 0 - Sócio eleminado, 1 - Sócio Activo.
  int estado;
