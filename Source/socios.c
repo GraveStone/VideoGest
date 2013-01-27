@@ -46,7 +46,7 @@ int ver_lista()
         return;
     }
     system("cls");
-    printf("\n\tN.de Soc. ||  Nome  ||  Morada  ||  Data de Nasci.  || Contacto\n\n");
+    printf("\nN.de Soc. ||  Nome  ||  Morada  ||  Data de Nasci.  || Contacto\n\n");
     do
     {
      teste=fread(&aux_soc,sizeof(SOCIO),1,fp_ver);
@@ -54,7 +54,7 @@ int ver_lista()
     {
     if(aux_soc.estado==1)
     {
-        printf("\n\t%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
+        printf("\n%d || %s || %s || %ld-%d-%d || %ld",aux_soc.num_soc,aux_soc.nome,aux_soc.morada,aux_soc.dt_nasc,aux_soc.contacto);
     }
     }
     }
