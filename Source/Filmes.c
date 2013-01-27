@@ -89,7 +89,7 @@ int ver_filmes()
     fclose(fp_ver_fil);
     return;
    }
-  printf("\n\tN.filme  ||  Titulo  ||  Duracao ||  Genero\n\n");
+  printf("\n\tN.filme  ||  Titulo  ||  Duracao ||  Genero  || Estado\n\n");
   do
    {
     teste=fread(&aux_fil,sizeof(filme),1,fp_ver_fil);
@@ -97,7 +97,7 @@ int ver_filmes()
      {
      if(aux_fil.estado!=0)
      {
-         printf("\n\t%d  ||  %s  ||  %d  ||  %s",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero);
+         printf("\n\t%d  ||  %s  ||  %d  ||  %s  || %d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero,aux_fil.estado);
      }
      }
    }
@@ -353,22 +353,30 @@ int filme_existe(int n_filme)
         {
             if(aux_fil.num_filme==n_filme)
             {
-                if(aux_fil.estado==1)
+                 if(aux_fil.estado==0)
+               {
+                printf("\nfilme nao existe");
+                getch();
+                fclose(fp_fil);
+                return 0;
+               }
+
+                if(aux_fil.estado==2)
+               {
+                printf("\nfilme nao esta disponivel");
+                getch();
+                fclose(fp_fil);
+                return 0;
+               }
+               if(aux_fil.estado==1)
                {
                 fclose(fp_fil);
                 return 1;
                }
-               else
-               {
-                    printf("\nFilme nao se encontra disponivel!!!");
-                    getch();
-                    return 0;
-              }
             }
         }
     }
     while(!feof(fp_fil));
-    getch();
     fclose(fp_fil);
     return 0;
 }

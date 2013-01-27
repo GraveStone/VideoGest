@@ -35,9 +35,9 @@ ALUGAR aux_al;
 ///\details Nesta função de aluguer é solicitado o numero do socio e do filme e a data de levantamento e coloca o estado a 1 para indicar aluguer activo.
 int aluguer()
 {
-    FILE *fp_al, *fp_fil;
+    FILE *fp_al;
     char op;
-    int bissexto, teste, a, b;
+    int alt=0, teste, a, b;
     int n_filme, n_socio;
     fpos_t filepos;
 
@@ -91,66 +91,58 @@ int aluguer()
        }
 
     while(aux_al.num_socio!=n_socio);
+
+    do
+    {
+    system("CLS");
     printf("\n\nInsira o numero de Filme:");
     scanf("%d",&n_filme);
+    if(n_filme<=0)
+    {
+        printf("\nNumero nao valido!!!");
+        getch();
+        rewind(stdin);
+    }
+    }
+    while(n_filme<=0);
+    do
+    {
     do
     {
        b=filme_existe(n_filme);
-       if(b==0)
-       {
-
-        printf("\nNumero nao valido insira novo numero de Filme:");
-        scanf("%d",&n_filme);
-
-
-
-       }
-       else
+       if(b==1)
        {
         aux_al.num_filme=n_filme;
        }
+       else
+       {
+        do
+        {
+        system("CLS");
+        rewind(stdin);
+        printf("\nNumero nao valido insira novo numero de Filme:");
+        scanf("%d",&n_filme);
+        rewind(stdin);
+        if(n_filme<=0)
+           {
+            printf("\nNumero nao valido!!!");
+            getch();
+            rewind(stdin);
+            }
+        }
+        while(n_filme<=0);
+       }
+    }
+    while(b==0);
     }
     while(aux_al.num_filme!=n_filme);
+    rewind(stdin);
     printf("\nData:\n\nInsira a Data de Aluguer formato aaaa-mm-dd:\n\nANO:");
     ins_data(&aux_al.data_lev.ano,&aux_al.data_lev.mes,&aux_al.data_lev.dia);
     aux_al.estado=1;
     fwrite(&aux_al,sizeof(ALUGAR),1,fp_al);
     rewind(stdin);
-
-    fp_fil=fopen("filmes.txt","r+b");
-    if(!fp_fil)
-    {
-        printf("\n\t Erro a ler o Ficheiro!!");
-        getch();
-        return;
-    }
-     do
-   {
-        fgetpos(fp_fil,&filepos);
-        teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
-        if(teste==1)
-        {
-            if(aux_fil.num_filme==n_filme)
-            {
-                if(aux_fil.estado==1)
-               {
-                aux_fil.estado=2;
-                fsetpos(fp_fil,&filepos);
-                fwrite(&aux_fil,sizeof(filme),1,fp_fil);
-               }
-               else
-               {
-                    printf("\nErro!!!");
-                    getch();
-                    return;
-              }
-            }
-        }
-    }
-    while(!feof(fp_fil));
-    getch();
-    fclose(fp_fil);
-
+    altera_estado_fil(n_filme,alt);
     do
     {
     printf("\nQuer Alugar outro filme?\n\n S-SIM\n N-NAO");
@@ -171,7 +163,7 @@ int aluguer()
 int devolucao()
 {
     FILE *fp_ver;
-    int teste,n_reg,dev, bissexto,alugado;
+    int teste,n_reg,dev,alugado=0, alt=1;
     fpos_t filepos;
 
     system("cls");
@@ -192,6 +184,7 @@ int devolucao()
         fclose(fp_ver);
         return;
     }
+    printf("\n\tN.filme  ||  N. Socio  || Data Req.\n\n");
     do
     {
         teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
@@ -199,7 +192,7 @@ int devolucao()
         {
             if(aux_al.estado==1)
             {
-               printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
+               printf("\n\t%d  ||  %d  ||  %ld-%d-%d ",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia);
                alugado++;
             }
         }
@@ -213,37 +206,25 @@ int devolucao()
         fclose(fp_ver);
         return;
     }
-
-    printf("Qual o Numero de Socio para devolucao:");
-    scanf("%d",&dev);
-    printf("\nN§ filme\tSocio");
-    do
-    {
-        teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
-        if(teste==1)
-        {
-            if(aux_al.num_socio==dev)
-            {
-               printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,n_reg);
-            }
-        }
-    }
-    while(!feof(fp_ver));
     rewind(fp_ver);
-    printf("Qual o Numero de filme para devolucao:");
-    scanf("%d",&dev);
-    printf("\nN§ filme\tSocio");
+
     do
     {
+        printf("\n\nQual o Numero de filme para devolucao:");
+        scanf("%d",&dev);
+        do
+        {
         fgetpos(fp_ver,&filepos);
         teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
         if(teste==1)
         {
             if(aux_al.num_filme==dev)
             {
+                if(aux_al.estado==1)
+                {
                 do
                 {
-                printf("\nData:\n\nInsira a DATA devolução formato aaaa-mm-dd:\n\nANO:");
+                printf("\nData:\n\nInsira a DATA devolucaoo formato aaaa-mm-dd:\n\nANO:");
                 ins_data(&aux_al.data_ent.ano,&aux_al.data_ent.mes,&aux_al.data_ent.dia);
                 aux_al.dias=num_dias(aux_al.data_lev.ano,aux_al.data_ent.ano,aux_al.data_lev.mes,aux_al.data_ent.mes,aux_al.data_lev.dia,aux_al.data_ent.dia);
                 if(aux_al.dias<0)
@@ -256,12 +237,17 @@ int devolucao()
                 aux_al.estado=0;
                 fsetpos(fp_ver,&filepos);
                 fwrite(&aux_al,sizeof(ALUGAR),1,fp_ver);
-                printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %ld",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,aux_al.dias);
-                fclose(fp_ver);
+                printf("\n\tN.filme  ||  N. Socio  || Data Req.  ||  Data Dev.  ||  Dias alugado\n");
+                printf("\n\t%d  ||  %d  || %ld-%d-%d  ||  %ld-%d-%d  ||  %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.data_ent.ano, aux_al.data_ent.mes, aux_al.data_ent.dia,aux_al.dias);
                 getch();
+                fclose(fp_ver);
+                altera_estado_fil(dev,alt);
                 return;
+                }
             }
         }
+    }while(!feof(fp_ver));
+    rewind(fp_ver);
     }
     while(!feof(fp_ver));
     getch();
@@ -293,16 +279,137 @@ int ver_alugados()
     fclose(fp_ver);
     return;
    }
-  printf("\nN§ filme\tSocio");
+  printf("\n\tN.filme  ||  N. Socio  || Data Req.  ||  Data Dev.  ||  Dias alugado\n");
+
   do
    {
     teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
     if(teste==1)
      {
-      printf("\n%d\t%d\t%ld-%d-%d\t%d n_reg %ld",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.estado,aux_al.dias);
+      printf("\n\t%d  ||  %d  || %ld-%d-%d  ||  %ld-%d-%d  ||  %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.data_ent.ano, aux_al.data_ent.mes, aux_al.data_ent.dia,aux_al.dias);
      }
    }
   while(!feof(fp_ver));
   getch();
   fclose(fp_ver);
+}
+
+
+///\brief Função altera_estado_fil() - função para colocar o filme como alugado.
+///\details Nesta função vai alterar o estado do filme para o estado de alugado
+///\param n_filme do tipo int recebe o numero do filme que se pretende procurar.
+///\return devolve um valor para indicar se o filme existe ou nao.
+int altera_estado_fil(int n_filme, int alt)
+{
+    FILE *fp_fil;
+    fpos_t filepos;
+    int teste;
+
+    fp_fil=fopen("filmes.txt","r+b");
+    if(!fp_fil)
+    {
+        printf("\n\t Erro a ler o Ficheiro!!");
+        getch();
+        return;
+    }
+   do
+   {
+   if(alt==0)
+    {
+        fgetpos(fp_fil,&filepos);
+        teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+        if(teste==1)
+        {
+            if(aux_fil.num_filme==n_filme)
+            {
+                if(aux_fil.estado==1)
+               {
+                aux_fil.estado=2;
+                fsetpos(fp_fil,&filepos);
+                fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                fclose(fp_fil);
+                return;
+               }
+               else
+               {
+                    printf("\nErro a alugar o filme!!!");
+                    getch();
+                    fclose(fp_fil);
+                    return;
+              }
+            }
+        }
+    }
+
+     if(alt==1)
+    {
+        fgetpos(fp_fil,&filepos);
+        teste=fread(&aux_fil,sizeof(filme),1,fp_fil);
+        if(teste==1)
+        {
+            if(aux_fil.num_filme==n_filme)
+            {
+                if(aux_fil.estado==2)
+               {
+                aux_fil.estado=1;
+                fsetpos(fp_fil,&filepos);
+                fwrite(&aux_fil,sizeof(filme),1,fp_fil);
+                fclose(fp_fil);
+                return;
+               }
+               else
+               {
+                    printf("\nErro a alugar o filme!!!");
+                    getch();
+                    fclose(fp_fil);
+                    return;
+              }
+            }
+        }
+    }
+    }
+    while(!feof(fp_fil));
+    fclose(fp_fil);
+}
+
+///\brief Função ver_filmes_dis() - função para ver lista dos filmes disponiveis para aluguer.
+///\details Nesta função apresenta no ecran a lista de filmes activos
+int ver_filmes_dis()
+ {
+  FILE *fp_ver_fil;
+  int teste,n_reg;
+
+  system("cls");
+  fp_ver_fil=fopen("filmes.txt","rb");
+  if(!fp_ver_fil)
+   {
+    printf("\n\t Erro na leitura do Ficheiro!!");
+    getch();
+    return;
+   }
+  fseek(fp_ver_fil,0L,SEEK_END);
+  n_reg=(ftell(fp_ver_fil))/sizeof(filme);
+  rewind(fp_ver_fil);
+  if(n_reg==0)
+   {
+    printf("\n Ficheiro vazio");
+    getch();
+    fclose(fp_ver_fil);
+    return;
+   }
+  printf("\n\tN.filme  ||  Titulo  ||  Duracao ||  Genero  || Estado\n\n");
+  do
+   {
+    teste=fread(&aux_fil,sizeof(filme),1,fp_ver_fil);
+    if(teste==1)
+     {
+     if(aux_fil.estado==1)
+     {
+         printf("\n\t%d  ||  %s  ||  %d  ||  %s  || %d",aux_fil.num_filme,aux_fil.nome,aux_fil.duracao, aux_fil.genero,aux_fil.estado);
+     }
+     }
+   }
+  while(!feof(fp_ver_fil));
+  getch();
+  fclose(fp_ver_fil);
 }

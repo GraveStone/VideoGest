@@ -24,21 +24,22 @@ int menu_aluguer(void)
         printf("\n\n\t\tA - Alugar");
         printf("\n\t\tB - Devolver");
         printf("\n\t\tC - Historico");
+        printf("\n\t\tD - Ver os filmes disponiveis");
         printf("\n\t\tS - Voltar ao Menu Principal");
         op=toupper(getch());
         switch(op)
         {
             case 'A':
                 aluguer();
-                printf("Alugar");
                 break;
             case 'B':
                 devolucao();
-                printf("Devolver");
                 break;
             case 'C':
                 ver_alugados();
-                printf("Historico");
+                break;
+            case 'D':
+                ver_filmes_dis();
                 break;
             case 'S':
                 return;
