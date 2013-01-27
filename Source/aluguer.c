@@ -254,12 +254,13 @@ int devolucao()
     fclose(fp_ver);
 }
 
-///\brief Função ver_alugados - função para ver os alugueres activos.
-///\details Nesta função mostra o filmes que ainda se encontram alugados
+///\brief Função ver_alugados - função para ver os alugueres e devoluções.
+///\details Nesta função mostra o filmes que ainda se encontram alugados e permite visualizar os filmes devolvidos.
 int ver_alugados()
  {
   FILE *fp_ver;
   int teste,n_reg;
+  char op;
 
   system("cls");
   fp_ver=fopen("alugados.txt","rb");
@@ -279,26 +280,64 @@ int ver_alugados()
     fclose(fp_ver);
     return;
    }
+do
+{
+printf("\n\t\tA - Ver os filmes Devolvidos");
+printf("\n\t\tB - Ver os filmes alugados");
+op=toupper(getch());
+switch(op)
+{
+case 'A':
+  {
   printf("\n\tN.filme  ||  N. Socio  || Data Req.  ||  Data Dev.  ||  Dias alugado\n");
-
   do
    {
     teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
     if(teste==1)
      {
+      if(aux_al.estado==0)
+       {
       printf("\n\t%d  ||  %d  || %ld-%d-%d  ||  %ld-%d-%d  ||  %d",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia,aux_al.data_ent.ano, aux_al.data_ent.mes, aux_al.data_ent.dia,aux_al.dias);
+       }
      }
    }
   while(!feof(fp_ver));
   getch();
   fclose(fp_ver);
+  return;
+  break;
+ }
+
+case 'B':
+  {
+  printf("\n\tN.filme  ||  N. Socio  || Data Req.\n");
+  do
+   {
+    teste=fread(&aux_al,sizeof(ALUGAR),1,fp_ver);
+    if(teste==1)
+     {
+      if(aux_al.estado==1)
+       {
+      printf("\n\t%d  ||  %d  || %ld-%d-%d ",aux_al.num_filme,aux_al.num_socio,aux_al.data_lev.ano, aux_al.data_lev.mes, aux_al.data_lev.dia);
+       }
+     }
+   }
+  while(!feof(fp_ver));
+  getch();
+  fclose(fp_ver);
+  return;
+  break;
+ }
+ }
+ }
+ while(op!='A' && op!='B');
 }
 
 
 ///\brief Função altera_estado_fil() - função para colocar o filme como alugado.
 ///\details Nesta função vai alterar o estado do filme para o estado de alugado
 ///\param n_filme do tipo int recebe o numero do filme que se pretende procurar.
-///\return devolve um valor para indicar se o filme existe ou nao.
+///\param alt do tipo int recebe o a condição para que estado deve alterar o filme.
 int altera_estado_fil(int n_filme, int alt)
 {
     FILE *fp_fil;
@@ -373,7 +412,7 @@ int altera_estado_fil(int n_filme, int alt)
 }
 
 ///\brief Função ver_filmes_dis() - função para ver lista dos filmes disponiveis para aluguer.
-///\details Nesta função apresenta no ecran a lista de filmes activos
+///\details Nesta função apresenta no ecran a lista de filmes disponiveis para aluguer
 int ver_filmes_dis()
  {
   FILE *fp_ver_fil;

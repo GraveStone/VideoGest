@@ -23,7 +23,7 @@ int menu_aluguer(void)
         printf("\n\n\t\t\t Menu aluguer");
         printf("\n\n\t\tA - Alugar");
         printf("\n\t\tB - Devolver");
-        printf("\n\t\tC - Historico");
+        printf("\n\t\tC - Ver filmes Alugados ou Devolvidos");
         printf("\n\t\tD - Ver os filmes disponiveis");
         printf("\n\t\tS - Voltar ao Menu Principal");
         op=toupper(getch());
